@@ -1,0 +1,18 @@
+.gradle/
+**/build/
+.idea/
+*.iml
+local.properties
+.env
+.env.*
+*.keystore
+*.jks
+*.pem
+*.key
+.DS_Store
+.venv/
+venv/
+__pycache__/
+
+# Kotlin compiler diagnostics
+.kotlin/
