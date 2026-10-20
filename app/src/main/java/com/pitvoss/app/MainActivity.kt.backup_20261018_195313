@@ -1,0 +1,125 @@
+package com.pitvoss.app
+
+import android.app.Activity
+import android.os.Bundle
+import android.webkit.JavascriptInterface
+import android.webkit.WebView
+import android.webkit.WebViewClient
+import android.webkit.WebSettings
+import org.json.JSONObject
+import java.net.HttpURLConnection
+import java.net.URL
+import java.util.concurrent.Executors
+import java.util.concurrent.ScheduledFuture
+import java.util.concurrent.TimeUnit
+
+class MainActivity : Activity() {
+    private lateinit var web: WebView
+    private val pool = Executors.newSingleThreadScheduledExecutor()
+    @Volatile private var priming = false
+    private var stopTask: ScheduledFuture<*>? = null
+    private var grillIp = ""
+    private val ipPattern = Regex("^(?:[0-9]{1,3}\\.){3}[0-9]{1,3}$")
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        web = WebView(this)
+        web.settings.javaScriptEnabled = true
+        web.settings.domStorageEnabled = true
+        web.settings.cacheMode = WebSettings.LOAD_NO_CACHE
+        web.settings.allowFileAccess = false
+        web.settings.allowContentAccess = false
+        web.webViewClient = WebViewClient()
+        web.addJavascriptInterface(Bridge(), "LockhartNative")
+        setContentView(web)
+        web.loadUrl("file:///android_asset/index.html")
+    }
+
+    private fun send(ip: String, method: String, params: JSONObject, id: Int): String {
+        val conn = URL("http://$ip/rpc").openConnection() as HttpURLConnection
+        try {
+            conn.requestMethod = "POST"
+            conn.connectTimeout = 3000
+            conn.readTimeout = 4000
+            conn.doOutput = true
+            conn.setRequestProperty("Content-Type", "application/json")
+            val payload = JSONObject().put("id", id).put("method", method).put("params", params).toString()
+            conn.outputStream.use { it.write(payload.toByteArray(Charsets.UTF_8)) }
+            val body = conn.inputStream.bufferedReader().use { it.readText() }
+            val reply = JSONObject(body)
+            val error = reply.optJSONObject("error")
+            if (error != null && error.optInt("code", -1) != 0) throw IllegalStateException(error.optString("message", "RPC error"))
+            return body
+        } finally { conn.disconnect() }
+    }
+
+    inner class Bridge {
+        @JavascriptInterface fun rpc(ip: String, method: String, params: String, requestId: Int) {
+            if (method != "GetState" || !ipPattern.matches(ip)) {
+                deliver(requestId, "", "Unsupported RPC or invalid IP"); return
+            }
+            pool.execute {
+                try { deliver(requestId, send(ip, method, JSONObject(params), requestId), "") }
+                catch (ex: Exception) { deliver(requestId, "", ex.message ?: "Network request failed") }
+            }
+        }
+
+        @JavascriptInterface fun prime(ip: String, action: String, seconds: Int, requestId: Int) {
+            if (!ipPattern.matches(ip) || action !in listOf("start", "stop") || (action == "start" && seconds !in 1..120)) {
+                deliverPrime(requestId, action, "", "Invalid prime request"); return
+            }
+            pool.execute {
+                try {
+                    if (action == "start") {
+                        if (priming) throw IllegalStateException("Prime already active")
+                        // Candidate bytes, not verified on the user's firmware.
+                        val body = send(ip, "SendGenericCommand", JSONObject().put("command", "FE0801FF"), requestId)
+                        priming = true
+                        grillIp = ip
+                        stopTask?.cancel(false)
+                        stopTask = pool.schedule({ stopPrimeInternal() }, seconds.toLong(), TimeUnit.SECONDS)
+                        deliverPrime(requestId, action, body, "")
+                    } else {
+                        stopTask?.cancel(false)
+                        val body = send(ip, "SendGenericCommand", JSONObject().put("command", "FE0800FF"), requestId)
+                        priming = false
+                        deliverPrime(requestId, action, body, "")
+                    }
+                } catch (ex: Exception) {
+                    deliverPrime(requestId, action, "", ex.message ?: "Prime RPC failed")
+                }
+            }
+        }
+    }
+
+    private fun stopPrimeInternal() {
+        if (!priming || grillIp.isEmpty()) return
+        try {
+            send(grillIp, "SendGenericCommand", JSONObject().put("command", "FE0800FF"), 999999)
+            priming = false
+            deliverPrime(999999, "stop", "", "")
+        } catch (ex: Exception) { deliverPrime(999999, "stop", "", "Automatic stop FAILED: ${ex.message}") }
+    }
+
+    private fun deliver(id: Int, body: String, error: String) {
+        val args = "${id},${JSONObject.quote(body)},${JSONObject.quote(error)}"
+        runOnUiThread { web.evaluateJavascript("window.receiveRpc($args)", null) }
+    }
+    private fun deliverPrime(id: Int, action: String, body: String, error: String) {
+        val args = "${id},${JSONObject.quote(action)},${JSONObject.quote(body)},${JSONObject.quote(error)}"
+        runOnUiThread { web.evaluateJavascript("window.receivePrime($args)", null) }
+    }
+    override fun onPause() {
+        // A held prime should never continue intentionally after leaving the app.
+        if (priming) pool.execute { stopTask?.cancel(false); stopPrimeInternal() }
+        super.onPause()
+    }
+    override fun onDestroy() {
+        if (priming) {
+            try { send(grillIp, "SendGenericCommand", JSONObject().put("command", "FE0800FF"), 999998) } catch (_: Exception) {}
+        }
+        pool.shutdownNow()
+        web.destroy()
+        super.onDestroy()
+    }
+}

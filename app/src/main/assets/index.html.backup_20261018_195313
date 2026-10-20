@@ -1,0 +1,119 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>PitVoss Control</title>
+<style>
+:root{color-scheme:dark;font-family:system-ui;background:#10151b;color:#e9f1f8}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:#10151b}body{padding:0;max-width:none}
+#pvBanner{position:fixed;top:0;left:0;right:0;height:20vh;height:20dvh;z-index:20;background:#000;box-shadow:0 3px 18px #000b;display:flex;align-items:center;justify-content:center}
+#pvBanner img{display:block;width:100%;height:100%;object-fit:contain}
+#pvMenuButton{position:fixed;z-index:30;right:14px;top:calc(20vh + 12px);top:calc(20dvh + 12px);background:#222e3a;border:1px solid #526170;color:#fff;border-radius:12px;padding:9px 14px;font-size:21px;box-shadow:0 3px 12px #0009}
+#pvContent{max-width:900px;margin:0 auto;padding:64px 12px 24px;position:relative;top:20vh;top:20dvh}
+#pvNav{display:none;position:fixed;z-index:29;right:12px;top:calc(20vh + 62px);top:calc(20dvh + 62px);width:min(310px,calc(100vw - 24px));background:#1b2530;border:1px solid #536476;border-radius:15px;padding:9px;box-shadow:0 12px 35px #000c}
+#pvNav.open{display:block}#pvNav button{display:block;width:100%;text-align:left;margin:3px 0;background:transparent;border:0;border-radius:9px;padding:13px;color:#fff;font-size:15px}#pvNav button.active{background:#31506a}
+.pvView{display:none}.pvView.active{display:block}.pvViewTitle{font-size:21px;margin:3px 0 12px}.panel{background:#1c2530;border:1px solid #344151;border-radius:15px;padding:16px;margin:12px 0}
+h2{font-size:18px;margin:0 0 12px}.muted{color:#9eaebe;font-size:13px}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.tile{padding:14px;background:#121a23;border-radius:12px;min-width:0}.value{font-size:35px;font-weight:750;margin-top:6px}.pvSetpoint{display:flex;justify-content:space-between;align-items:center;gap:12px}.pvSetpoint strong{font-size:30px;color:#ffae68;min-height:36px}.pvControls{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin-top:14px}.pvControls button{min-width:0;padding:12px 5px}.pvControls button:disabled{opacity:.55;cursor:not-allowed}.pvPrimeStop{background:#933b32}.pvPrimeDialog{border:1px solid #64778a;border-radius:15px;background:#1c2530;color:#fff;width:min(92vw,390px);padding:20px}.pvPrimeDialog::backdrop{background:#000b}.pvPrimeDialog input{width:100px}.pvPrimeDialog .row{margin-top:12px}.pvEntry{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:10px 0;padding:10px;background:#121a23;border-radius:9px}.pvEntry button{flex-shrink:0}.pvEntryText{min-width:0;overflow-wrap:anywhere}.pvEntry small{display:block;color:#9eaebe;margin-top:3px}.chip{border-radius:30px;padding:8px 12px;background:#523c31;font-size:13px}.chip.ok{background:#23553c}.row{display:flex;gap:9px;align-items:center;flex-wrap:wrap}input,select,button{padding:11px;border-radius:8px;background:#101720;color:white;border:1px solid #596a7b;font:inherit}button{background:#295e81}input[type=number]{width:90px}input[type=text]{width:150px}canvas{width:100%;height:220px;background:#121a23;border-radius:10px}.flags{display:flex;gap:8px;flex-wrap:wrap}.flag{background:#101720;padding:7px 10px;border-radius:7px;font-size:12px}.on{background:#23553c}.warn{color:#f1c178}label{font-size:13px}.rule{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:9px 0}.rule input{width:80px}.note{font-size:13px;color:#b5c5d4}#events{white-space:pre-wrap;max-height:140px;overflow:auto;font-size:12px}.legend{display:flex;gap:10px;flex-wrap:wrap}.legend label{display:flex;align-items:center;gap:4px}
+@media(max-width:420px){.panel{padding:12px}.value{font-size:29px}.tile{padding:11px}}
+</style></head><body>
+<div id="pvBanner"><img src="pitvoss_banner.png" alt="PitVoss Control"></div>
+<button id="pvMenuButton" aria-label="Open menu" aria-expanded="false">☰</button>
+<nav id="pvNav" aria-label="App views">
+<button data-view="dashboard" class="active">Dashboard</button>
+<button data-view="history">Temperature History</button>
+<button data-view="alerts">High/Low Alerts</button>
+<button data-view="controller">Controller Status</button>
+<button data-view="connection">Connection &amp; Alerts</button>
+</nav>
+<main id="pvContent">
+<div class="pvView active" id="view-dashboard">
+<div class="row" style="justify-content:space-between;margin-bottom:8px"><div id="status" class="chip">Connecting…</div><span class="muted" id="updated">No readings yet</span></div>
+<section class="panel"><div class="pvSetpoint"><span class="muted">Set Temperature</span><strong id="pvSetpoint" aria-live="polite"></strong></div><div class="pvControls"><button id="pvPowerOn" disabled title="Control protocol not verified">Power On</button><button id="pvPowerOff" disabled title="Control protocol not verified">Power Off</button><button id="pvPrime" style="touch-action:manipulation">Prime</button></div><div class="row" style="margin-top:10px"><button id="pvStopPrime" class="pvPrimeStop">Stop Prime</button><span id="pvPrimeStatus" class="muted" aria-live="polite">Prime idle</span></div><p class="muted">Tap Prime for 1–120 seconds, or press and hold to prime while held. Prime command is experimental; stay at the grill.</p></section><section class="panel"><div class="grid" id="chambers"></div></section>
+<section class="panel"><h2>Meat Probes</h2><div class="grid" id="probes"></div><p class="muted">Disconnected probes display —</p></section>
+<section class="panel"><h2>Cook Sessions</h2><div class="row"><input id="cookName" placeholder="Brisket / ribs" maxlength="60"><button id="startCook">Add Cook</button></div><div id="cookInfo"></div></section>
+<section class="panel"><h2>Timers</h2><div class="row"><input id="timerName" placeholder="Wrap / rest" maxlength="50"><input id="minutes" type="number" min="1" max="1440" value="30"><button id="startTimer">Start</button></div><div id="timers"></div></section>
+</div>
+<div class="pvView" id="view-history"><h2 class="pvViewTitle">Temperature History</h2><section class="panel"><div class="row"><label>Range <select id="range"><option value="1800">30 min</option><option value="7200" selected>2 hr</option><option value="21600">6 hr</option><option value="86400">24 hr</option></select></label><button id="export">Export CSV</button></div><div id="legend" class="legend"></div><canvas id="chart"></canvas><p class="muted">History saved on this phone while the app is running. Up to 24 hours retained.</p></section></div>
+<div class="pvView" id="view-alerts"><h2 class="pvViewTitle">High/Low Alerts</h2><section class="panel"><div id="rules"></div><button id="saveRules">Save limits</button><p class="muted">In-app alerts only while open. Not a safety monitoring system.</p></section></div>
+<div class="pvView" id="view-controller"><h2 class="pvViewTitle">Controller Status</h2><section class="panel"><div id="flags" class="flags"></div></section></div>
+<div class="pvView" id="view-connection"><h2 class="pvViewTitle">Connection &amp; Alerts</h2><section class="panel"><div class="row"><label>Grill IP <input type="text" id="ip" inputmode="decimal" value="192.168.1.153"></label><button id="saveIP">Connect</button></div><p class="note">Same Wi-Fi network required. Prime is experimental. Power controls remain disabled.</p></section><section class="panel"><div id="events">Starting…</div><p class="warn">Do not rely on this app as a fire alarm or unattended-cooking safeguard.</p></section></div>
+</main>
+<dialog id="pvPrimeDialog" class="pvPrimeDialog"><h2>Timed Prime</h2><p class="note">Enter a duration (1–120 seconds). The app sends a stop command when the time expires. Keep the smoker attended.</p><label>Seconds <input id="pvPrimeSeconds" type="number" min="1" max="120" step="1" value="15"></label><div class="row"><button id="pvStartTimedPrime">Start Prime</button><button id="pvCancelPrime">Cancel</button></div></dialog>
+<script>
+const $=id=>document.getElementById(id),keys=['grillTemp','smokerActTemp','p_1_Temp','p_2_Temp','p_3_Temp','p_4_Temp'],names=['Main chamber','Upper cabinet','Probe 1','Probe 2','Probe 3','Probe 4'],colors=['#6eb5ff','#ffbd73','#7ce0ad','#d5a0fa','#ff8585','#f2df73'];
+const get=(k,f)=>{try{return JSON.parse(localStorage.getItem(k))??f}catch(e){return f}},put=(k,v)=>localStorage.setItem(k,JSON.stringify(v));
+let ip=get('ip','192.168.1.153'),history=get('history',[]),rules=get('rules',{}),timers=get('timers',[]),cooks=get('cooks',[]),selected=get('selected',[true,true,false,false,false,false]),pending=0,busy=false,last=null,armed=new Set(),timerFired=new Set(),events=[];
+if(!Array.isArray(cooks))cooks=[];const legacyCook=get('cook',null);if(legacyCook&&Number.isFinite(legacyCook.start)&&!get('cookMigrated',false)){cooks.push({...legacyCook,id:'legacy-'+legacyCook.start});put('cooks',cooks)}put('cookMigrated',true);
+$('ip').value=ip;
+// The native layer owns the 120-second maximum and stop watchdog.
+let primeRequest=200000,primeHolding=false,primeHoldTimer=null,primePointerDown=false,primeActive=false,primeUntil=0;
+function primeStatus(s){$('pvPrimeStatus').textContent=s;log(s)}
+function primeSend(action,seconds){
+ if(!window.LockhartNative||!window.LockhartNative.prime){primeStatus('Install updated Android bridge to enable Prime');return false}
+ window.LockhartNative.prime(ip,action,seconds,++primeRequest);return true
+}
+window.receivePrime=function(id,action,body,error){
+ if(error){primeStatus('Prime '+action+' error: '+error);if(action==='start')primeActive=false;return}
+ if(action==='start'){primeActive=true;primeStatus('Prime command sent · check auger')}
+ else if(action==='stop'){primeActive=false;primeUntil=0;primeStatus('Stop command sent · verify auger stopped')}
+};
+const primeButton=$('pvPrime'),primeDialog=$('pvPrimeDialog');
+function primeRelease(){
+ clearTimeout(primeHoldTimer);
+ if(primeHolding){primeHolding=false;primeUntil=0;primeSend('stop',0)}
+ primePointerDown=false;
+}
+primeButton.addEventListener('pointerdown',e=>{
+ if(e.button!==0||primeActive)return;
+ primePointerDown=true;primeHolding=false;
+ try{primeButton.setPointerCapture(e.pointerId)}catch(_e){}
+ primeHoldTimer=setTimeout(()=>{
+  if(!primePointerDown)return;
+  primeHolding=true;primeUntil=0;
+  if(primeSend('start',120))primeStatus('Hold Prime · release to stop (120s max)');
+ },450);
+});
+primeButton.addEventListener('pointerup',e=>{
+ const wasHold=primeHolding;primeRelease();
+ if(!wasHold&&!primeActive){primeDialog.showModal()}
+});
+primeButton.addEventListener('pointercancel',primeRelease);
+primeButton.addEventListener('lostpointercapture',()=>{if(primePointerDown)primeRelease()});
+$('pvCancelPrime').onclick=()=>primeDialog.close();
+$('pvStartTimedPrime').onclick=()=>{
+ const sec=Number($('pvPrimeSeconds').value);
+ if(!Number.isInteger(sec)||sec<1||sec>120)return alert('Choose a whole number from 1 to 120 seconds');
+ primeDialog.close();
+ if(primeSend('start',sec)){primeUntil=Date.now()+sec*1000;primeStatus('Timed prime requested · '+sec+'s (check auger)')}
+};
+$('pvStopPrime').onclick=()=>{primeRelease();primeUntil=0;primeSend('stop',0);primeStatus('Stop requested · check auger')};
+window.addEventListener('pagehide',()=>{if(primeHolding)primeRelease()});
+
+function valid(v){return typeof v==='number'&&v>=0&&v<900}function t(v){return valid(v)?v+'°F':'—'}
+function log(s){events.unshift(new Date().toLocaleTimeString()+' · '+s);events=events.slice(0,12);$('events').textContent=events.join('\n')}
+function alertUser(s){log('ALERT: '+s);if(navigator.vibrate)navigator.vibrate([200,100,200]);alert(s)}
+function rpc(){if(busy)return;busy=true;const id=++pending;window.LockhartNative.rpc(ip,'GetState','{}',id);setTimeout(()=>{if(busy&&id===pending){busy=false;$('status').textContent='● Timeout';$('status').className='chip';last=null;drawSetpoint();log('No response from grill')}},6000)}
+window.receiveRpc=function(id,body,error){if(id!==pending)return;busy=false;if(error){$('status').textContent='● Disconnected';$('status').className='chip';last=null;drawSetpoint();log(error);return}try{const outer=JSON.parse(body);if(outer.error&&outer.error.code!==0)throw Error('RPC '+outer.error.message);let d=outer.error&&outer.error.message?JSON.parse(outer.error.message):(outer.result||outer);if(!('grillTemp'in d))throw Error('No temperature data');last=d;const now=Date.now()/1000;history.push({t:now,...Object.fromEntries(keys.map(k=>[k,d[k]]))});history=history.filter(x=>x.t>now-86400).slice(-18000);put('history',history);$('status').textContent='● Connected';$('status').className='chip ok';$('updated').textContent='Updated '+new Date().toLocaleTimeString();drawSetpoint();drawTemps();drawChart();drawFlags();checkLimits();}catch(e){$('status').textContent='● Parse error';$('status').className='chip';last=null;drawSetpoint();log(e.message)}};
+function drawSetpoint(){const on=last&&(last.moduleIsOn===true||last.moduleIsOn===1);const v=on?last.grillSetTemp:null;$('pvSetpoint').textContent=valid(v)&&v>0?t(v):''}
+function drawTemps(){if(!last)return;
+function tile(k,i){return '<div class="tile"><div class="muted">'+names[i]+'</div><div class="value">'+t(last[k])+'</div></div>'}
+$('chambers').innerHTML=keys.slice(0,2).map((k,i)=>tile(k,i)).join('');
+$('probes').innerHTML=keys.slice(2).map((k,i)=>tile(k,i+2)).join('')}
+
+function drawFlags(){const ks=['moduleIsOn','fanState','motorState','hotState','primeState','lightState','fanErr','motorErr','hotErr','tempHighErr','noPellets'];$('flags').innerHTML=ks.map(k=>'<span class="flag '+(last[k]?'on':'')+'">'+k+': '+(last[k]?'ON':'off')+'</span>').join('')}
+function drawRules(){let s='';keys.forEach((k,i)=>{const r=rules[k]||{};s+='<div class="rule"><label>'+names[i]+'</label><div class="row"><input type="number" min="32" max="600" id="lo'+i+'" placeholder="Low" value="'+(r.low??'')+'"><input type="number" min="32" max="600" id="hi'+i+'" placeholder="High" value="'+(r.high??'')+'"></div></div>'});$('rules').innerHTML=s}
+$('saveRules').onclick=()=>{let r={};for(let i=0;i<6;i++){let low=$('lo'+i).value,high=$('hi'+i).value;if(low&&(!Number.isFinite(+low)||+low<32||+low>600))return alert('Invalid low limit');if(high&&(!Number.isFinite(+high)||+high<32||+high>600))return alert('Invalid high limit');if(low&&high&&+low>=+high)return alert('Low must be below high');r[keys[i]]={low:low?+low:null,high:high?+high:null}}rules=r;armed.clear();put('rules',rules);log('Limits saved')};
+function checkLimits(){if(!last)return;keys.forEach((k,i)=>{const v=last[k],r=rules[k]||{};if(!valid(v))return;for(const side of ['low','high']){const n=r[side];if(n===null||n===undefined)continue;const key=k+side,hit=side==='low'?v<=n:v>=n;if(hit&&!armed.has(key)){armed.add(key);alertUser(names[i]+' '+side+' alert: '+v+'°F (limit '+n+'°F)')}if(!hit&&(side==='low'?v>n+5:v<n-5))armed.delete(key)}})}
+function legend(){ $('legend').innerHTML=keys.map((k,i)=>'<label style="color:'+colors[i]+'"><input type="checkbox" data-i="'+i+'" '+(selected[i]?'checked':'')+'>'+names[i]+'</label>').join('');$('legend').querySelectorAll('input').forEach(el=>el.onchange=()=>{selected[+el.dataset.i]=el.checked;put('selected',selected);drawChart()})}
+function drawChart(){const c=$('chart'),w=Math.max(280,c.clientWidth),h=220,dpr=devicePixelRatio||1;c.width=w*dpr;c.height=h*dpr;const ctx=c.getContext('2d');ctx.scale(dpr,dpr);const now=Date.now()/1000,pts=history.filter(p=>p.t>=now-Number($('range').value)),values=pts.flatMap(p=>keys.filter((k,i)=>selected[i]&&valid(p[k])).map(k=>p[k]));if(values.length<2){ctx.fillStyle='#b5c5d4';ctx.fillText('Waiting for readings…',15,28);return}const min=Math.max(0,Math.floor((Math.min(...values)-20)/25)*25),max=Math.ceil((Math.max(...values)+20)/25)*25||100;for(let i=0;i<5;i++){let y=14+i*45;ctx.strokeStyle='#30404d';ctx.beginPath();ctx.moveTo(38,y);ctx.lineTo(w-8,y);ctx.stroke();ctx.fillStyle='#9eafbf';ctx.fillText(Math.round(max-(max-min)*i/4)+'°',3,y+4)}const start=now-Number($('range').value);keys.forEach((k,i)=>{if(!selected[i])return;ctx.beginPath();ctx.strokeStyle=colors[i];ctx.lineWidth=2;let active=false;pts.forEach(p=>{if(!valid(p[k])){active=false;return}let x=38+(w-48)*(p.t-start)/(now-start),y=14+180*(max-p[k])/(max-min||1);if(!active)ctx.moveTo(x,y);else ctx.lineTo(x,y);active=true});ctx.stroke()})}
+function drawCook(){const now=Date.now()/1000;$('cookInfo').innerHTML=cooks.map(c=>{const sec=Math.max(0,Math.floor((c.end??now)-c.start));const elapsed=Math.floor(sec/3600)+'h '+Math.floor(sec%3600/60)+'m '+sec%60+'s';return '<div class="pvEntry"><div class="pvEntryText"><strong>'+escapeHTML(c.name)+'</strong><small>'+elapsed+(c.end?' · Finished':' · Running')+'</small></div><button data-cook-id="'+escapeHTML(c.id)+'">'+(c.end?'Remove':'End')+'</button></div>'}).join('')||'<p class="muted">No cook sessions</p>';$('cookInfo').querySelectorAll('button').forEach(b=>b.onclick=()=>{const c=cooks.find(c=>c.id===b.dataset.cookId);if(!c)return;if(c.end)cooks=cooks.filter(x=>x.id!==c.id);else c.end=Date.now()/1000;put('cooks',cooks);drawCook()})}
+$('startCook').onclick=()=>{cooks.push({id:'cook-'+Date.now()+'-'+Math.random().toString(36).slice(2),name:$('cookName').value.trim()||'Cook',start:Date.now()/1000});$('cookName').value='';put('cooks',cooks);drawCook()};
+function drawTimers(){const now=Date.now()/1000;$('timers').innerHTML=timers.map(x=>{const s=Math.max(0,Math.ceil(x.end-now));return '<div class="row" style="justify-content:space-between;margin:10px 0"><span>'+escapeHTML(x.name)+' · '+Math.floor(s/60)+':'+String(s%60).padStart(2,'0')+'</span><button data-id="'+x.id+'">Remove</button></div>'}).join('')||'<p class="muted">No timers</p>';$('timers').querySelectorAll('button').forEach(b=>b.onclick=()=>{timers=timers.filter(t=>t.id!==b.dataset.id);put('timers',timers);drawTimers()})}
+function escapeHTML(x){return String(x).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+$('startTimer').onclick=()=>{const m=+$('minutes').value;if(!Number.isFinite(m)||m<1||m>1440)return alert('Enter 1–1440 minutes');timers.push({id:'timer-'+Date.now()+'-'+Math.random().toString(36).slice(2),name:$('timerName').value.trim()||'Timer',end:Date.now()/1000+m*60});put('timers',timers);drawTimers()};
+function tick(){if(primeUntil&&Date.now()>=primeUntil){primeUntil=0;primeSend('stop',0)}else if(primeUntil){$('pvPrimeStatus').textContent='Timed prime · '+Math.ceil((primeUntil-Date.now())/1000)+'s remaining'}drawCook();drawTimers();const now=Date.now()/1000;timers.forEach(x=>{if(now>=x.end&&!timerFired.has(x.id)){timerFired.add(x.id);alertUser('Timer finished: '+x.name)}})}
+$('saveIP').onclick=()=>{const s=$('ip').value.trim();if(!/^(\d{1,3}\.){3}\d{1,3}$/.test(s)||s.split('.').some(x=>+x>255))return alert('Invalid IPv4 address');ip=s;put('ip',ip);log('Using '+ip);rpc()};$('range').onchange=drawChart;
+$('export').onclick=()=>{const csv=['time,'+keys.join(','),...history.map(x=>[new Date(x.t*1000).toISOString(),...keys.map(k=>x[k]??'')].join(','))].join('\n');const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));a.download='pitvoss-history.csv';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)};
+drawRules();legend();drawSetpoint();drawCook();drawTimers();drawChart();log('Prime experimental · power commands remain disabled');setInterval(rpc,5000);setInterval(tick,1000);rpc();
+
+const pvNav=$('pvNav'),pvMenuButton=$('pvMenuButton');
+function pvOpen(view){document.querySelectorAll('.pvView').forEach(v=>v.classList.toggle('active',v.id==='view-'+view));pvNav.querySelectorAll('button').forEach(b=>b.classList.toggle('active',b.dataset.view===view));pvNav.classList.remove('open');pvMenuButton.setAttribute('aria-expanded','false');window.scrollTo(0,0);if(view==='history')setTimeout(drawChart,0)}
+pvMenuButton.onclick=()=>{const open=pvNav.classList.toggle('open');pvMenuButton.setAttribute('aria-expanded',String(open))};
+pvNav.querySelectorAll('button').forEach(b=>b.onclick=()=>pvOpen(b.dataset.view));
+</script></body></html>
