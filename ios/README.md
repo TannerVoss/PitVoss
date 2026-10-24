@@ -2,7 +2,7 @@
 
 Separate iOS port of the existing Android app for the Pit Boss Lockhart PB2180LK. The source is the existing Android PitVoss project, including its October 22 dashboard and model catalog. Android files were only read. `android-source-sha256.json` records the input files.
 
-Status: **compiled successfully for the iOS simulator on GitHub**, with Xcode on a macOS runner. [Successful build](https://github.com/TannerVoss/Pit_Master_Controller/actions/runs/40051896536). Xcode and the iOS SDK are absent on the authoring Mac. Swift syntax checks, project/plist validation, and desktop dashboard contract tests also pass. Physical iPhone installation, signing and smoker functions remain untested.
+Status: **compiled successfully for the iOS simulator on GitHub**, with Xcode on a macOS runner. [Successful build](https://github.com/TannerVoss/Pit_Master_Controller/actions/runs/40051896536). Xcode 27.1 and the iOS 27.1 SDK are now installed on the authoring Mac; the local unsigned simulator build also passes. Swift syntax checks, project/plist validation, and desktop dashboard contract tests also pass. Physical iPhone installation, signing and smoker functions remain untested.
 
 ## Build on an Apple Silicon Mac
 
@@ -18,7 +18,7 @@ Unsigned simulator build after Xcode installation:
 xcodebuild -project PitMaster.xcodeproj -scheme PitMaster -sdk iphonesimulator -destination 'generic/platform=iOS Simulator' -derivedDataPath build CODE_SIGNING_ALLOWED=NO build
 ```
 
-No `EXCLUDED_ARCHS` workaround is needed for Apple Silicon. The project uses standard UIKit, WebKit, CoreBluetooth, Foundation, and Darwin APIs. The build above passed on GitHub; repeat it locally after installing Xcode before device testing or distribution.
+No `EXCLUDED_ARCHS` workaround is needed for Apple Silicon. The project uses standard UIKit, WebKit, CoreBluetooth, Foundation, and Darwin APIs. The build above passed on GitHub and locally with Xcode 27.1.
 
 ## What was ported
 
