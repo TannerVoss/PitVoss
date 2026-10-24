@@ -1,0 +1,27 @@
+// !$*UTF8*$!
+{archiveVersion = 1; classes = {}; objectVersion = 56; objects = {
+000000000000000000000001 = { isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "App.swift"; sourceTree = "<group>"; };
+000000000000000000000002 = { isa = PBXBuildFile; fileRef = 000000000000000000000001; };
+000000000000000000000003 = { isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NetworkRPC.swift"; sourceTree = "<group>"; };
+000000000000000000000004 = { isa = PBXBuildFile; fileRef = 000000000000000000000003; };
+000000000000000000000005 = { isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BluetoothRPC.swift"; sourceTree = "<group>"; };
+000000000000000000000006 = { isa = PBXBuildFile; fileRef = 000000000000000000000005; };
+000000000000000000000007 = { isa = PBXFileReference; lastKnownFileType = folder; path = Web; sourceTree = "<group>"; };
+000000000000000000000008 = { isa = PBXBuildFile; fileRef = 000000000000000000000007; };
+000000000000000000000009 = { isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+00000000000000000000000A = { isa = PBXFileReference; explicitFileType = wrapper.application; path = PitMaster.app; sourceTree = BUILT_PRODUCTS_DIR; };
+00000000000000000000000B = { isa = PBXGroup; path = PitMaster; sourceTree = "<group>"; children = (000000000000000000000001,000000000000000000000003,000000000000000000000005,000000000000000000000009,000000000000000000000007); };
+00000000000000000000000C = { isa = PBXGroup; name = Products; sourceTree = "<group>"; children = (00000000000000000000000A); };
+00000000000000000000000D = { isa = PBXGroup; sourceTree = "<group>"; children = (00000000000000000000000B,00000000000000000000000C); };
+00000000000000000000000E = { isa = PBXSourcesBuildPhase; buildActionMask = 2147483647; files = (000000000000000000000002,000000000000000000000004,000000000000000000000006); runOnlyForDeploymentPostprocessing = 0; };
+00000000000000000000000F = { isa = PBXResourcesBuildPhase; buildActionMask = 2147483647; files = (000000000000000000000008); runOnlyForDeploymentPostprocessing = 0; };
+000000000000000000000010 = { isa = PBXFrameworksBuildPhase; buildActionMask = 2147483647; files = (); runOnlyForDeploymentPostprocessing = 0; };
+000000000000000000000011 = { isa = XCBuildConfiguration; name = Debug; buildSettings = {"SDKROOT" = "iphoneos"; "IPHONEOS_DEPLOYMENT_TARGET" = "16.0"; "SWIFT_VERSION" = "5.0"; "CLANG_ENABLE_MODULES" = "YES";}; };
+000000000000000000000012 = { isa = XCBuildConfiguration; name = Release; buildSettings = {"SDKROOT" = "iphoneos"; "IPHONEOS_DEPLOYMENT_TARGET" = "16.0"; "SWIFT_VERSION" = "5.0"; "CLANG_ENABLE_MODULES" = "YES";}; };
+000000000000000000000013 = { isa = XCConfigurationList; buildConfigurations = (000000000000000000000011,000000000000000000000012); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release; };
+000000000000000000000014 = { isa = XCBuildConfiguration; name = Debug; buildSettings = {"SDKROOT" = "iphoneos"; "IPHONEOS_DEPLOYMENT_TARGET" = "16.0"; "SWIFT_VERSION" = "5.0"; "CLANG_ENABLE_MODULES" = "YES"; "PRODUCT_NAME" = "PitMaster"; "PRODUCT_BUNDLE_IDENTIFIER" = "com.pitmastercontroller.ios"; "INFOPLIST_FILE" = "PitMaster/Info.plist"; "CODE_SIGN_STYLE" = "Automatic"; "TARGETED_DEVICE_FAMILY" = "1,2"; "SUPPORTED_PLATFORMS" = "iphoneos iphonesimulator"; "SWIFT_OPTIMIZATION_LEVEL" = "-Onone"; "GENERATE_INFOPLIST_FILE" = "NO";}; };
+000000000000000000000015 = { isa = XCBuildConfiguration; name = Release; buildSettings = {"SDKROOT" = "iphoneos"; "IPHONEOS_DEPLOYMENT_TARGET" = "16.0"; "SWIFT_VERSION" = "5.0"; "CLANG_ENABLE_MODULES" = "YES"; "PRODUCT_NAME" = "PitMaster"; "PRODUCT_BUNDLE_IDENTIFIER" = "com.pitmastercontroller.ios"; "INFOPLIST_FILE" = "PitMaster/Info.plist"; "CODE_SIGN_STYLE" = "Automatic"; "TARGETED_DEVICE_FAMILY" = "1,2"; "SUPPORTED_PLATFORMS" = "iphoneos iphonesimulator"; "SWIFT_OPTIMIZATION_LEVEL" = "-O"; "GENERATE_INFOPLIST_FILE" = "NO";}; };
+000000000000000000000016 = { isa = XCConfigurationList; buildConfigurations = (000000000000000000000014,000000000000000000000015); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release; };
+000000000000000000000017 = { isa = PBXNativeTarget; buildConfigurationList = 000000000000000000000016; buildPhases = (00000000000000000000000E,000000000000000000000010,00000000000000000000000F); buildRules = (); dependencies = (); name = PitMaster; productName = PitMaster; productReference = 00000000000000000000000A; productType = "com.apple.product-type.application"; };
+000000000000000000000018 = { isa = PBXProject; attributes = {LastUpgradeCheck = 1600;}; buildConfigurationList = 000000000000000000000013; compatibilityVersion = "Xcode 14.0"; developmentRegion = en; hasScannedForEncodings = 0; knownRegions = (en,Base); mainGroup = 00000000000000000000000D; productRefGroup = 00000000000000000000000C; projectDirPath = ""; projectRoot = ""; targets = (000000000000000000000017); };
+}; rootObject = 000000000000000000000018;}
