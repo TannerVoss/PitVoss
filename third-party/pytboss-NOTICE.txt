@@ -1,0 +1,2 @@
+Model catalog, board command definitions and parsing routines derived from PytBoss by Daniel Knowles and contributors. https://github.com/dknowles2/pytboss
+Apache License 2.0. Modified for this app: exported model profiles and commands, ported frame parsing helpers and normalization. Model presence does not imply this app has been tested on that hardware.
