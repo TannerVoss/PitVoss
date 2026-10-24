@@ -6,7 +6,7 @@
 - Property-list and Xcode project format validation: passed.
 - Desktop Chrome dashboard test with a mocked iOS message handler: passed; no JavaScript exceptions. Checks dashboard startup, native method availability, safety acknowledgment, transport getter, provisioning dispatch, disabled priming and disabled background monitoring UI.
 - Android source hash comparison: see validation report. Android source was not edited.
-- Full iOS compilation: not performed. Xcode/iPhone SDK is not installed on this Mac.
+- Full unsigned iOS simulator compilation: PASS on GitHub macOS/Xcode runner. [Build evidence](https://github.com/TannerVoss/Pit_Master_Controller/actions/runs/40051896536). Local Xcode/iPhone SDK is not installed.
 - Actual WKWebView, BLE, local network, smoker commands, signing and App Store upload: not tested.
 
 `Tests/dashboard.cjs` is a desktop smoke test. With Node.js, Playwright and Chrome installed, run `node Tests/dashboard.cjs`. It uses a mocked native handler and never connects to hardware. `dashboard-preview.png` is a desktop rendering, not an iPhone screenshot.
