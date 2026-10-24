@@ -16,3 +16,13 @@ __pycache__/
 
 # Kotlin compiler diagnostics
 .kotlin/
+
+# Local credentials and development artifacts
+.signing/
+keystore.properties
+release-signing.properties
+node_modules/
+.pitmaster-backups/
+recovery-backups/
+*.backup*
+*.pre-redesign
