@@ -185,7 +185,7 @@ input,textarea,[contenteditable="true"]{ -webkit-user-select:text;user-select:te
 button{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
 #pvPrime{touch-action:none!important}
 #pvPrime.pmHeldPrime{color:#ffe0a1!important;text-shadow:0 0 9px #ffc25d,0 0 22px #e79432!important;box-shadow:inset 0 0 0 3px #090c10,inset 0 0 22px #bd6a1a,0 0 0 2px #e4a54e,0 0 18px #c97b37!important}
-/* Compact banner: original Pit Voss-style wordmark, updated to Pit Master.
+/* Compact banner: original Pit Master Controller wordmark.
    Keep logo nearly edge-to-edge, without a giant square hero header. */
 #pvBanner{height:clamp(90px,14dvh,145px)!important}
 #pvBanner .pmLogoArtwork{width:100%;height:100%;object-fit:contain;object-position:center}
@@ -194,30 +194,58 @@ button{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
 #pvMenuButton{top:calc(clamp(90px,14dvh,145px) + 12px)!important}
 #pvContent{top:clamp(90px,14dvh,145px)!important}
 #pvNav{top:calc(clamp(90px,14dvh,145px) + 62px)!important}
-</style></head><body>
-<div id="pvBanner" aria-label="Pit Master Controller"><img class="pmLogoArtwork" src="pitmaster_banner.png" alt="Pit Master Controller wordmark in the original Pit Voss logo style"></div>
+
+.pmDashboardGrill{font-size:clamp(24px,6vw,34px);margin:4px 0 20px;text-align:center;color:#edf3f5;overflow-wrap:anywhere}
+#pmConnectionsDialog{box-sizing:border-box;width:min(540px,calc(100vw - 28px));max-height:85dvh;overflow:auto;padding:22px;border:1px solid #536875;border-radius:22px;background:#14212a;color:#eaf0f4;box-shadow:0 24px 80px #0009}
+#pmConnectionsDialog::backdrop{background:#000b;backdrop-filter:blur(4px)}
+.pmDialogHeader{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}.pmDialogHeader h2{margin:2px 0;font-size:26px}.pmDialogHeader p{margin:4px 0 12px;overflow-wrap:anywhere}.pmEyebrow{font-size:11px;letter-spacing:2px;color:#9faeb9}.pmDialogHeader button{min-width:42px;min-height:42px;padding:8px}
+#pmConnectionsDialog #pmWifiProvisionPanel{padding:0!important;border:0!important;margin:20px 0 0!important}#pmConnectionsDialog #pmConnectionOverview{background:#0f1a22;margin:16px 0!important}#pmConnectionsDialog p{line-height:1.5}#pmWifiProvisionButton{width:100%;min-height:48px}#pmWifiProvisionStatus{font-size:14px;color:#c6d5df}
+#view-addpit #savedPits .pmWifiGrillRow{border:1px solid #334550;border-radius:14px;padding:14px;margin:12px 0;background:#101a22;cursor:pointer;transition:border-color .15s,background .15s}
+#view-addpit #savedPits .pmWifiGrillRow.pmGrillSelected{border-color:#efa54e;background:#25313a;box-shadow:inset 3px 0 #efa54e}
+#view-addpit #savedPits .pmWifiGrillName{display:block!important;min-width:0;flex:1}.pmWifiGrillName strong{display:block;overflow-wrap:anywhere}.pmWifiGrillName .pmWifiState{margin-top:5px}.pmWifiGrillRow:focus-visible{outline:2px solid #efa54e;outline-offset:3px}
+
+html{box-sizing:border-box;scroll-padding-bottom:24px}*,*:before,*:after{box-sizing:inherit}body{margin:0;min-width:0;overflow-wrap:break-word}
+#pvContent{top:0!important;width:100%;padding-top:calc(clamp(90px,14dvh,145px) + 64px);padding-bottom:max(32px,env(safe-area-inset-bottom));min-width:0}
+#pvNav{max-height:calc(var(--usable-height,100dvh) - clamp(90px,14dvh,145px) - 76px);overflow-y:auto;max-width:calc(100vw - 24px)}
+#pmConnectionsDialog,.pvPrimeDialog{max-height:calc(var(--usable-height,100dvh) - 24px);max-width:calc(100vw - 24px);overflow-y:auto;overscroll-behavior:contain;scroll-padding:18px}
+input,select,button{max-width:100%}input,select{font-size:16px}#pmWifiNetworks{width:100%;min-height:48px;margin:8px 0}#pmWifiScanStatus{font-size:13px;color:#b6c7d2;line-height:1.45}.pmWifiSearchRow{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:8px 0 14px}.pmWifiSearchRow button{min-height:44px}
+@media(max-width:360px){#pvContent{padding-left:8px;padding-right:8px}.panel{padding:12px}#pmConnectionsDialog{padding:16px}.pvControlGroup{gap:8px}.pmDashboardGrill{font-size:26px}}
+@media(max-height:500px){#pvBanner{height:72px!important}#pvContent{padding-top:126px!important}#pvMenuButton{top:80px!important}#pvNav{top:126px!important;max-height:calc(var(--usable-height,100dvh) - 138px)}}
+[hidden]{display:none!important}
+#pmWifiNetworks{display:flex;align-items:center;justify-content:space-between;gap:12px;text-align:left;border-radius:13px;background:linear-gradient(#101c24,#182730);border:1px solid #637783;color:#edf3f5;padding:14px 16px;box-shadow:inset 0 2px 5px #0005;white-space:normal}
+#pmWifiNetworkName{min-width:0;overflow-wrap:anywhere}#pmWifiNetworks[aria-expanded="true"]{border-color:#efa54e}
+#pmWifiChoices{background:#0f1b23;border:1px solid #536875;border-radius:14px;padding:6px;margin:0 0 14px;max-height:min(250px,40dvh);overflow-y:auto;overscroll-behavior:contain;box-shadow:0 10px 24px #0005}
+#pmWifiChoices button{display:flex;align-items:center;justify-content:space-between;gap:12px;text-align:left;width:100%;padding:13px 12px;min-height:50px;border:0;border-radius:9px;color:#edf3f5;background:transparent;box-shadow:none;white-space:normal}
+#pmWifiChoices button+button{border-top:1px solid #2b3d47}#pmWifiChoices button[aria-pressed="true"]{background:#29353c;color:#ffc581}#pmWifiChoices button:focus-visible{outline:2px solid #efa54e;outline-offset:-2px}#pmWifiChoices button span:first-child{min-width:0;overflow-wrap:anywhere}#pmWifiChoices small{flex-shrink:0;color:#afc0ca;font-size:12px}#pmWifiChoices .pmManualNetwork{color:#ffc581}
+#pmWifiPullHint{font-size:12px;text-align:center;color:#a9bbc6;padding:6px;margin:0;min-height:30px}#pmWifiChoices{touch-action:pan-y}#pmWifiNetworks{background:linear-gradient(#101c24,#182730)!important;color:#edf3f5!important;border:1px solid #637783!important;box-shadow:inset 0 2px 5px #0005!important;text-shadow:none!important}
+#pmWifiChoices button{background:transparent!important;color:#edf3f5!important;border:0!important;border-radius:9px!important;box-shadow:none!important;text-shadow:none!important}#pmWifiChoices button+button{border-top:1px solid #2b3d47!important}#pmWifiChoices button[aria-pressed="true"]{background:#29353c!important;color:#ffc581!important}#pmWifiChoices .pmManualNetwork{color:#ffc581!important}
+#pmWifiSsid,#pmWifiPassword,#pitIP,#ip,#pvTargetTemp{direction:ltr}#view-about .panel{margin-bottom:14px}#pmLegalDialog{width:min(620px,calc(100vw - 24px))}#pmLegalDialog button{margin-top:16px}</style></head><body>
+<div id="pvBanner" aria-label="Pit Master Controller"><img class="pmLogoArtwork" src="pitmaster_banner.png" alt="Pit Master Controller wordmark"></div>
 <button id="pvMenuButton" aria-label="Open menu" aria-expanded="false">☰</button>
 <nav id="pvNav" aria-label="App views">
 <button data-view="dashboard" class="active">Dashboard</button>
 <button data-view="history">Temperature History</button>
 <button data-view="alerts">High/Low Alerts</button>
 <button data-view="controller">Controller Status</button>
-<button data-view="addpit">Add a New Smoker</button>
+<button data-view="addpit">My Grills</button>
+<button data-view="about">About &amp; Help</button>
 <div class="pvMenuUnits"><span>Temperature</span><select id="pvUnitSelect" aria-label="Temperature units"><option value="F">°F</option><option value="C">°C</option></select></div>
 </nav>
 <main id="pvContent">
 <div class="pvView active" id="view-dashboard">
+<h1 id="pmDashboardGrill" class="pmDashboardGrill">My Grill</h1>
 <div class="pvConnectionDisplays" role="group" aria-label="Device connections">
 <div class="pvConnectionDisplay"><span class="pvConnectionLabel">WI-FI</span><span class="pvDigitalStatus" id="status" role="status" aria-live="polite"><span id="connectionText">NO CONNECTION</span></span></div>
 <div class="pvConnectionDisplay"><span class="pvConnectionLabel">BLUETOOTH</span><span class="pvDigitalStatus" id="pvBluetoothStatus" role="status"><span id="pvBluetoothText">NOT CONNECTED</span></span></div>
 </div>
 <section class="panel pvControlPanel">
   <div class="pvSetpoint"><strong id="pvSetpoint" aria-label="Reported set temperature" aria-live="polite"></strong><button id="pvLight" class="pvLightButton" type="button" aria-pressed="false" title="Toggle grill light">LIGHT · —</button></div>
-  <div class="pvSetTempRow"><label class="pvTempField" for="pvTargetTemp"><span id="pvTempUnit">°F</span><input id="pvTargetTemp" aria-label="Target grill temperature" type="number" min="160" max="500" step="5" value="225"></label><div class="pvSlide" id="pvTempSlide"><div class="pvSlideTrack"><span class="pvSlidePrompt">SLIDE TO START COOK →</span><button id="pvApplyTemp" type="button" class="pvSlideHandle" aria-label="Slide right to start cook at selected temperature">➜</button></div></div></div>
+  <div class="pvSetTempRow"><label class="pvTempField" for="pvTargetTemp"><span id="pvTempUnit">°F</span><input id="pvTargetTemp" aria-label="Target grill temperature" type="number" min="160" max="500" step="5" value="225"></label><div class="pvSlide" id="pvTempSlide"><div class="pvSlideTrack"><span class="pvSlidePrompt">SLIDE TO SET TEMP →</span><button id="pvApplyTemp" type="button" class="pvSlideHandle" aria-label="Slide right to set cooking temperature">➜</button></div></div></div>
 
+  <p id="pmTemperatureStatus" role="status" aria-live="polite" style="text-align:center;color:#c6d5df;font-size:14px;line-height:1.45;min-height:22px;margin:8px 0 16px">Choose a temperature, then slide to apply.</p>
   <div class="pvControlGroup pvPowerGroup">
-    <button id="pvPowerOn" type="button" title="Send controller power command"><span>Power On</span><span class="pvSmoke" id="pvSmoke" aria-hidden="true"><i></i><i></i><i></i></span></button>
-    <button id="pvPowerOff" type="button" title="Send controller power command"><span>Power Off</span><span id="pvCoolingText" class="pvCoolingText" aria-hidden="true">Cooling Down</span></button>
+    <button id="pvPowerOn" type="button" title="Change grill power"><span>Power On</span><span class="pvSmoke" id="pvSmoke" aria-hidden="true"><i></i><i></i><i></i></span></button>
+    <button id="pvPowerOff" type="button" title="Change grill power"><span>Power Off</span><span id="pvCoolingText" class="pvCoolingText" aria-hidden="true">Cooling Down</span></button>
   </div>
   <div class="pvControlGroup pvPrimeGroup"><button id="pvPrime" type="button" style="touch-action:manipulation">Prime</button><button id="pvStopPrime" type="button" class="pvPrimeStop">Stop Prime</button></div>
 
@@ -230,7 +258,25 @@ button{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
 <div class="pvView" id="view-history"><h2 class="pvViewTitle">Temperature History</h2><section class="panel"><div class="row"><label>Cook <select id="historyCook" aria-label="Cook session"></select></label><label>Range <select id="range"><option value="1800">30 min</option><option value="7200" selected>2 hr</option><option value="21600">6 hr</option><option value="86400">24 hr</option></select></label></div><div id="legend" class="legend"></div><canvas id="chart"></canvas><p class="muted" id="historyInfo">Temperature readings are saved per cook session on this device. Start a cook to begin recording.</p><div class="pvExportRow"><button id="export" type="button">Export CSV</button></div></section></div>
 <div class="pvView" id="view-alerts"><h2 class="pvViewTitle">High/Low Alerts</h2><section class="panel"><div id="rules"></div><button id="saveRules">Save limits</button><div class="pvMonitorRow"><label class="pvToggleLabel"><input id="backgroundAlerts" type="checkbox"> Keep notifications active when app is closed</label><span id="monitorStatus" class="muted">Monitoring off</span></div><p class="note">Requires notification permission and a persistent Android monitoring notification. The phone must remain on the grill's Wi-Fi network. This is not a substitute for attending the smoker or a fire alarm.</p></section></div>
 <div class="pvView" id="view-controller"><h2 class="pvViewTitle">Controller Status</h2><section class="panel"><div id="flags" class="pvFlagGrid"></div></section></div>
-<div class="pvView" id="view-addpit"><!-- pmPerGrillWifiV7 --><style>#view-addpit .pmWifiConnected{display:inline-flex;vertical-align:middle;margin-left:7px;color:#6fe39a}#view-addpit .pmWifiConnected svg{width:19px;height:19px;stroke:currentColor;stroke-width:2.5;fill:none;stroke-linecap:round;stroke-linejoin:round}#view-addpit .pmWifiAction{margin-left:8px}</style><style>@keyframes pmGreenTripleV6{0%,100%,28%,60%{box-shadow:0 0 0 1px transparent}9%,20%,42%,53%,75%,87%{box-shadow:0 0 0 2px rgba(118,222,156,.8),0 0 17px rgba(92,210,132,.38)}}#view-addpit .pmGreenTripleV6{animation:pmGreenTripleV6 1.25s ease-in-out 1!important}</style><!-- Pit Master minimal setup v5 --><style>
+<div class="pvView" id="view-addpit"><style id="pmWifiSetupVisibleV9">
+#view-addpit #savedPits .pmWifiGrillRow{display:flex!important;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px}
+#view-addpit #savedPits .pmWifiGrillRow>.pmWifiGrillName,
+#view-addpit #savedPits .pmWifiGrillRow>.pmWifiGrillActions{display:flex!important;align-items:center!important;gap:9px!important;flex-wrap:wrap}
+#view-addpit #savedPits .pmWifiGrillRow .pmWifiIndicator,
+#view-addpit #savedPits .pmWifiGrillRow .pmWifiState{display:inline-flex!important;align-items:center!important}
+#view-addpit #savedPits .pmWifiGrillRow .pmWifiState{font-size:12px;color:#ffb86b}
+#view-addpit #savedPits .pmWifiGrillRow .pmWifiGrillActions button{display:inline-flex!important;min-height:42px!important}
+#view-addpit #pmWifiSetupPanel{display:none!important}
+#view-addpit #pmWifiSetupPanel[hidden]{display:none!important}
+</style><style>
+#view-addpit #savedPits .pmSavedGrill > .pmWifiControls,
+#view-addpit #savedPits .pmSavedGrill > .pvEntryText{display:flex!important;align-items:center!important;gap:8px!important;min-width:0}
+#view-addpit #savedPits .pmSavedGrill > .pvEntryText{flex-wrap:wrap}
+#view-addpit #savedPits .pmSavedGrill > .pmWifiControls{flex-wrap:wrap;justify-content:flex-end}
+#view-addpit #savedPits .pmSavedGrill .pmWifiControls button{display:inline-flex!important;align-items:center;justify-content:center;min-height:40px}
+#view-addpit #savedPits .pmSavedGrill .pmWifiConnected{display:inline-flex!important}
+#view-addpit #savedPits .pmSavedGrill .pmWifiConnected svg{display:block!important}
+</style><!-- pmPerGrillWifiV7 --><style>#view-addpit .pmWifiConnected{display:inline-flex;vertical-align:middle;margin-left:7px;color:#6fe39a}#view-addpit .pmWifiConnected svg{width:19px;height:19px;stroke:currentColor;stroke-width:2.5;fill:none;stroke-linecap:round;stroke-linejoin:round}#view-addpit .pmWifiAction{margin-left:8px}</style><style>@keyframes pmGreenTripleV6{0%,100%,28%,60%{box-shadow:0 0 0 1px transparent}9%,20%,42%,53%,75%,87%{box-shadow:0 0 0 2px rgba(118,222,156,.8),0 0 17px rgba(92,210,132,.38)}}#view-addpit .pmGreenTripleV6{animation:pmGreenTripleV6 1.25s ease-in-out 1!important}</style><!-- Pit Master Controller minimal setup v5 --><style>
 /* Setup-only presentation: preserve underlying Bluetooth and Wi-Fi handlers. */
 #view-addpit #selectedBleInfo,
 #view-addpit #bleControlStatus,
@@ -242,31 +288,150 @@ button{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
 #view-addpit #savedPits .muted,
 #view-addpit #savedPits .note,
 #view-addpit #savedPits small,
-#view-addpit #savedPits .pvEntry > div > :not(:first-child),
 #view-addpit #pitDetails,
-#view-addpit label:has(#pitIP),
 #view-addpit label:has(#ip) { display:none !important; }
-</style><!-- Clean red marks v4 --><style>#view-addpit #bleControlStatus,#view-addpit #bleDiagnostics,#view-addpit #pmTestResult,#view-addpit #pmTransportStatus,#view-addpit label:has(> #pitIP),#view-addpit label:has(> #ip){display:none!important}</style><h2 class="pvViewTitle">Add a Grill</h2>
+</style><!-- Clean red marks v4 --><style>#view-addpit #bleControlStatus,#view-addpit #bleDiagnostics,#view-addpit #pmTestResult,#view-addpit #pmTransportStatus,#view-addpit label:has(> #ip){display:none!important}</style><h2 class="pvViewTitle">Add a Grill</h2>
 
 <section class="panel" style="margin-bottom:12px"><h2>Connection Type</h2><!-- Connection Type — clean setup v2 --><select id="pmTransportMode" style="display:block;width:100%;margin:8px 0"><option value="automatic">Automatic</option><option value="bluetooth">Bluetooth Only</option><option value="wifi">Wi-Fi Only</option></select><div id="pmTransportStatus" class="note" aria-live="polite" hidden>Automatic — Wi-Fi dashboard available</div></section>
-<section class="panel pmSetupStep"><div class="pmStepHeader"><span class="pmStepNum">1</span><div><h2>Find Your Grill</h2><p>Choose your grill</p></div></div><div class="pmActionRow"><button id="scanPits">Find Grills</button><span id="scanStatus" class="muted" aria-live="polite">Ready to scan</span></div><div class="pmActionRow" hidden hidden style="margin:8px 0;gap:8px;flex-wrap:wrap"><button type="button" id="pmExportBleLog" hidden>Share BLE Log</button><button type="button" id="pmCopyBleLog" hidden>Copy Log</button><button type="button" id="pmClearBleLog" hidden>Clear Log</button><span id="pmBleLogCount" class="muted" hidden>Log ready</span></div><div id="bleDiagnostics" class="note" style="white-space:pre-wrap;margin:8px 0;max-height:220px;overflow:auto" hidden>Scanner diagnostics appear here after scanning.</div><div id="pitResults"></div><div id="selectedBleInfo" class="pmTestResult" style="display:none;margin-top:10px;min-height:76px" aria-live="polite"></div><div id="bleControlStatus" role="status" aria-live="polite" style="min-height:44px;padding:10px 12px;margin:8px 0;border:1px solid #454545;border-radius:8px;color:#b7c2ce;box-sizing:border-box" hidden>Bluetooth data: Not tested</div><details hidden><summary>Other Bluetooth devices</summary><div id="otherBle" hidden></div></details></section>
-<section class="panel pmSetupStep"><div class="pmStepHeader"><span class="pmStepNum">2</span><div><h2>Add Your Grill</h2><p>Give your grill a name</p></div></div><div class="pmSetupFields"><label>Grill name<input id="pitNickname" type="text" maxlength="45" placeholder="Backyard Lockhart"></label><label hidden>Grill network address<input id="pitIP" type="text" inputmode="decimal" placeholder="192.168.1.153"></label></div><div class="pmActionRow"><button id="savePit">Add Grill</button></div></section>
+<section class="panel pmSetupStep"><div class="pmStepHeader"><span class="pmStepNum">1</span><div><h2>Find Your Grill</h2><p>Choose your grill</p></div></div><div class="pmActionRow"><button id="scanPits">Find Grills</button><span id="scanStatus" class="muted" aria-live="polite">Ready to scan</span></div><div class="pmActionRow" hidden hidden style="margin:8px 0;gap:8px;flex-wrap:wrap"><button type="button" id="pmExportBleLog" hidden>Share BLE Log</button><button type="button" id="pmCopyBleLog" hidden>Copy Log</button><button type="button" id="pmClearBleLog" hidden>Clear Log</button><span id="pmBleLogCount" class="muted" hidden>Log ready</span></div><div id="bleDiagnostics" class="note" style="white-space:pre-wrap;margin:8px 0;max-height:220px;overflow:auto" hidden>Scanner diagnostics appear here after scanning.</div><div id="pitResults"></div><div id="selectedBleInfo" class="pmTestResult" style="display:none;margin-top:10px;min-height:76px" aria-live="polite"></div><div id="bleControlStatus" role="status" aria-live="polite" style="min-height:44px;padding:10px 12px;margin:8px 0;border:1px solid #454545;border-radius:8px;color:#b7c2ce;box-sizing:border-box" hidden>Bluetooth data: Not tested</div><details><summary>Other nearby devices</summary><div id="otherBle"></div></details></section>
+<section class="panel pmSetupStep"><div class="pmStepHeader"><span class="pmStepNum">2</span><div><h2>Add Your Grill</h2><p>Give your grill a name</p></div></div><div class="pmSetupFields"><label>Grill model<select id="pmGrillModel"></select></label><label id="pmOtherModelLabel" hidden>Model name<input id="pmOtherModel" type="text" maxlength="80" placeholder="Model from the grill label"></label><label>Grill name<input id="pitNickname" type="text" maxlength="45" placeholder="Backyard Lockhart"></label><label>Grill network address (optional)<input id="pitIP" type="text" inputmode="decimal" placeholder="192.168.1.153"></label></div><div class="pmActionRow"><button id="savePit">Add Grill</button></div></section>
 <section class="panel pmSetupStep" hidden style="display:none!important"><div class="pmStepHeader"><span class="pmStepNum">3</span><div><h2>Connect to Wi-Fi</h2><p>Keep your phone and grill on the same network</p></div></div><div class="pmActionRow"><label class="pmGrow" hidden>Grill network address<input type="text" id="ip" inputmode="decimal" placeholder="192.168.1.153"></label><button id="saveIP">Connect to Wi-Fi</button></div><div id="pmTestResult" class="pmTestResult" role="status" aria-live="polite" hidden>Enter the IP address, then test the connection.</div><div id="events" hidden aria-hidden="true"></div></section>
-<section class="panel pmSetupStep"><div class="pmStepHeader"><span class="pmStepNum">4</span><div><h2>My Grills</h2><p>Your saved grills</p></div></div><div id="savedPits"></div><div class="pmActionRow"><button id="removePit">Remove Selected Grill</button></div><div id="pitDetails" class="pvPitDetails" aria-live="polite"></div></section></div>
+<section class="panel pmSetupStep"><div class="pmStepHeader"><span class="pmStepNum">3</span><div><h2>My Grills</h2><p>Your saved grills</p></div></div><p class="note">Open beta · Any model can be added. Features and connections may vary.</p><div id="savedPits"></div><dialog id="pmConnectionsDialog" aria-labelledby="pmConnectionsTitle"><div class="pmDialogHeader"><div><p class="pmEyebrow">MY GRILLS</p><h2 id="pmConnectionsTitle">Connections</h2><p id="pmConnectionsGrill"></p></div><button type="button" id="pmCloseConnections" aria-label="Close connections">✕</button></div><section id="pmConnectionOverview" class="panel" style="margin:14px 0;padding:16px;border:1px solid #536875;border-radius:12px" aria-live="polite">
+  <h3>Connection Status</h3><label for="pmConnectionModel">Grill model</label><select id="pmConnectionModel" style="width:100%;margin:8px 0"></select><p id="pmCompatibilityStatus" class="note"></p><button id="pmBetaReport" type="button">Share Test Report</button>
+  <p>Bluetooth: <strong id="pmBleLinkStatus">Not connected</strong></p>
+  <p>Wi-Fi: <strong id="pmWifiLinkStatus">Not connected</strong></p>
+  <p>Active connection: <strong id="pmActiveLinkStatus">Not connected</strong></p>
+  <p id="pmVerifiedAddress" class="muted"></p>
+</section>
+<section id="pmWifiProvisionPanel" style="margin:18px 0;padding:16px;border:1px solid #666;border-radius:12px">
+  <h3>Connect Pit to Wi-Fi</h3>
+  <p>Keep your phone near your grill and connected to your home Wi-Fi. We’ll connect to your grill automatically. Your grill may restart during setup.</p>
+  <span id="pmWifiNetworkLabel">Wi-Fi network</span>
+  <div id="pmWifiPicker">
+    <button id="pmWifiNetworks" type="button" aria-labelledby="pmWifiNetworkLabel pmWifiNetworkName" aria-expanded="false" aria-controls="pmWifiChoices"><span id="pmWifiNetworkName">Choose a network</span><span aria-hidden="true">⌄</span></button>
+    <div id="pmWifiChoices" role="group" aria-label="Available Wi-Fi networks" hidden></div>
+  </div>
+  <p id="pmWifiScanStatus" role="status">Choose a network or enter its name.</p>
+
+  <label id="pmWifiManualLabel" for="pmWifiSsid">Wi-Fi network name</label>
+  <input id="pmWifiSsid" type="text" autocomplete="off" placeholder="Home Wi-Fi name" style="display:block;width:100%;box-sizing:border-box;margin:8px 0 14px;padding:12px">
+  <label for="pmWifiPassword">Wi-Fi password</label>
+  <input id="pmWifiPassword" type="password" autocomplete="off" placeholder="Wi-Fi password" style="display:block;width:100%;box-sizing:border-box;margin:8px 0 14px;padding:12px">
+  <button id="pmWifiProvisionButton" type="button" style="padding:12px">Connect Pit To Wi-Fi</button>
+  <p id="pmWifiProvisionStatus" role="status">Enter your home Wi-Fi details to get started.</p>
+</section></dialog><div id="pmWifiSetupPanel" hidden style="display:none!important"><p id="pmWifiSetupInstructions"></p><p id="pmWifiCheckStatus" aria-live="polite"></p></div><div class="pmActionRow"><button id="removePit">Remove Selected Grill</button></div><div id="pitDetails" class="pvPitDetails" aria-live="polite"></div></section><!-- pmWifiProvisionV1 -->
+
+</div>
 
 
+<div class="pvView" id="view-about"><h2 class="pvViewTitle">About &amp; Help</h2>
+<section class="panel"><h2>Pit Master Controller</h2><p id="pmAppVersion"></p><p>Independent grill companion. Free and ad-free. Model compatibility is experimental; a listed model is not a claim of hardware testing.</p><p id="pmSupportContact"></p><p>Publisher: Tanner Voss</p><div class="row"><button type="button" data-legal="privacy">Privacy Policy</button><button type="button" data-legal="terms">Safety &amp; Terms</button><button type="button" data-legal="licenses">Open-source Licenses</button></div></section>
+<section class="panel"><h2>Connection help</h2><p>Keep your phone near the grill and on the same home network. Allow Nearby devices for Bluetooth. Wi-Fi searches may require precise Location and Location services.</p><p>Some firmware has no local Wi-Fi interface. Bluetooth-only controls and password-protected firmware are not yet implemented. Background temperature monitoring is currently limited to decoded legacy Wi-Fi readings. Timers can run independently of the grill connection, while Android permits the monitoring service.</p><p>If setup fails, open My Grills → Connections → Share Test Report. Review the report before sharing. Never include your Wi-Fi password.</p><p>On restricted or guest Wi-Fi, devices may be unable to reach each other. The app only connects to private local IPv4 addresses. Remote priming is disabled in the general-release build.</p></section>
+<section class="panel"><h2>Your data</h2><p>Saved grills, cook history, timers, preferences and diagnostic logs stay on this device unless you choose to export or share them.</p><div class="row"><button id="pmExportBackup" type="button">Export App Backup</button><button id="pmImportBackup" type="button">Restore App Backup</button></div><p class="note">Backups contain saved names, network addresses and cook data. Store them privately.</p><button id="pmDeleteLocalData" type="button">Delete Local Data</button><p class="note">This does not erase network settings on the grill or previously exported files.</p></section></div>
 </main>
 <div id="pvScrim" aria-hidden="true"></div>
 <div id="pvToast" role="status" aria-live="polite"></div>
 <dialog id="pvConfirmDialog" class="pvPrimeDialog"><h2 id="pvConfirmTitle">Confirm</h2><p id="pvConfirmMessage"></p><div class="row"><button id="pvConfirmCancel" type="button">Cancel</button><button id="pvConfirmOK" type="button">Confirm</button></div></dialog>
 <dialog id="pvPrimeDialog" class="pvPrimeDialog"><h2>Timed Prime</h2><p class="note">Choose a duration. Keep the smoker attended.</p><div class="pvPresetGrid"><button type="button" data-prime-seconds="30">30s</button><button type="button" data-prime-seconds="60">60s</button><button type="button" data-prime-seconds="90">90s</button><button type="button" data-prime-seconds="120">120s</button></div><div class="row"><button id="pvCancelPrime">Cancel</button></div></dialog>
+<dialog id="pmLegalDialog" class="pvPrimeDialog" aria-labelledby="pmLegalTitle"><h2 id="pmLegalTitle"></h2><div id="pmLegalText" style="white-space:pre-wrap;font-size:14px;line-height:1.6;overflow-wrap:anywhere"></div><div class="row"><button id="pmOpenPublishedPolicy" type="button">Open published page</button><button id="pmCloseLegal" type="button">Close</button></div></dialog>
+<dialog id="pmSafetyDialog" class="pvPrimeDialog" aria-labelledby="pmSafetyTitle"><h2 id="pmSafetyTitle">Before using Pit Master Controller</h2><p>Attend to your grill and follow the manufacturer's recommended instructions. Monitor and verify power and temperature changes.</p><p>Wireless connections, readings, and notifications can fail. This app is not a guaranteed monitor.</p><p>Model compatibility is experimental. Listing a model does not mean it has been tested against that model's hardware.</p><p>Published by Tanner Voss. Read the Terms of Service &amp; Safety Notice before continuing. Nothing in these terms limits rights that cannot lawfully be excluded.</p><div class="row"><button id="pmReadSafety" type="button">Read Safety &amp; Terms</button><button id="pmAcceptSafety" type="button">I understand</button></div></dialog>
+<script src="release-config.js"></script>
+<script src="model-catalog.js"></script>
 <script>
 const $=id=>document.getElementById(id),keys=['grillTemp','smokerActTemp','p_1_Temp','p_2_Temp','p_3_Temp','p_4_Temp'],names=['Grill','Cabinet','Probe 1','Probe 2','Probe 3','Probe 4'],colors=['#6eb5ff','#ffbd73','#7ce0ad','#d5a0fa','#ff8585','#f2df73'];
 const get=(k,f)=>{try{return JSON.parse(localStorage.getItem(k))??f}catch(e){return f}},put=(k,v)=>localStorage.setItem(k,JSON.stringify(v));
 let ip=get('ip',''),history=get('history',[]),cookHistory=get('cookHistory',{}),rules=get('rules',{}),timers=get('timers',[]),cooks=get('cooks',[]),selected=get('selected',[true,true,false,false,false,false]),pending=0,busy=false,last=null,armed=new Set(),timerFired=new Set(),events=[];
+let foundPits=[],savedPits=get('savedPits',[]),selectedPit=get('selectedPit','');
+const grillCatalog=window.PM_GRILL_CATALOG||{models:{},boards:{}};
+function selectedGrillProfile(){
+ const saved=savedPits.find(g=>pitIdentity(g)===selectedPit);
+ const model=saved?.model||'PB2180LK';
+ const profile=grillCatalog.models[model];
+ const advertised=saved?.bleName||foundPits.find(g=>g.address===selectedPit)?.name||'';
+ const prefix=advertised.split('-')[0];
+ return {model,board:profile?.board||(grillCatalog.boards[prefix]?prefix:''),...profile};
+}
+function syncGrillProfile(){const p=selectedGrillProfile();if(window.LockhartNative?.configureGrillProfile)window.LockhartNative.configureGrillProfile(p.model,p.board||'');}
+function acceptedGrillTargets(unit){const p=selectedGrillProfile();return (unit==='F'?p.setpointsF:p.setpointsC)||[];}
+function updateModelUI(){
+ const p=selectedGrillProfile(),values=acceptedGrillTargets(displayUnit),input=$('pvTargetTemp');
+ input.min=values.length?Math.min(...values):(displayUnit==='F'?160:71);input.max=values.length?Math.max(...values):(displayUnit==='F'?600:315);input.step='1';
+ $('pmCompatibilityStatus').textContent=(p.name||'Other / Unknown')+' · '+(p.board?'Controller '+p.board+' · ':'')+'Experimental — compatibility has not been verified. Test while attending your grill.';
+}
+function modelFrame(raw,kind){
+ const p=selectedGrillProfile(),board=grillCatalog.boards[p.board],code=board?.[kind];
+ if(!code||typeof raw!=='string')return null;
+ const message=raw.replace(/\s+/g,'');if(!/^[0-9a-fA-F]+$/.test(message)||message.length%2)return null;
+ const min=kind==='status'?board.statusMin:board.temperatureMin;if(min&&message.length<min*2)return null;
+ try{
+  const decode=new Function('message',`const convertTemperature=(p,i)=>{const v=p[i]*100+p[i+1]*10+p[i+2];return v===960?null:v;};const parseHexMessage=s=>s.match(/../g).map(b=>parseInt(b,16));${code}`);
+  const result=decode(message);if(!result)return null;
+  (kind==='status'?board.dropStatus:board.dropTemperatures).forEach(k=>delete result[k]);
+  if(kind==='temperatures'&&result.isFahrenheit===false)board.convertFields.forEach(k=>{if(typeof result[k]==='number')result[k]=Math.floor((result[k]-32)/1.8);});
+  return result;
+ }catch(_){return null;}
+}
+function normalizeModelState(data){
+ let d={...data};
+ if('sc_11' in d||'sc_12' in d){d={...(modelFrame(d.sc_11,'status')||{}),...(modelFrame(d.sc_12,'temperatures')||{})};}
+ for(let n=1;n<=4;n++){if(('p'+n+'Temp') in d)d['p_'+n+'_Temp']=d['p'+n+'Temp'];}
+ return d;
+}
+const releaseConfig=window.PM_RELEASE||{};
+const runtimeInfo=(()=>{try{return JSON.parse(window.LockhartNative?.getRuntimeInfo?.()||'{}');}catch(_){return {};}})();
+if(runtimeInfo.safetyAcknowledged===false)localStorage.removeItem('safetyAcknowledged_v1');
+function ensureSafetyAcknowledged(){
+ if(get('safetyAcknowledged_v1',false))return true;
+ if(!$('pmSafetyDialog').open)$('pmSafetyDialog').showModal();return false;
+}
+let activeLegalKind="privacy";
+function showLegal(kind){
+ activeLegalKind=kind;
+ const titles={privacy:'Privacy Policy',terms:'Safety & Terms',licenses:'Open-source Licenses'};
+ $('pmLegalTitle').textContent=titles[kind]||'About';
+ $('pmLegalText').textContent=kind==='privacy'?releaseConfig.privacyText:kind==='terms'?releaseConfig.termsText:(releaseConfig.noticeText||'')+'\n\n'+(releaseConfig.licenseText||'');
+ if(!$('pmLegalDialog').open)$('pmLegalDialog').showModal();
+}
+function redactDiagnostic(text){
+ return String(text).replace(/\b(?:\d{1,3}\.){3}\d{1,3}\b/g,'[local address]')
+  .replace(/\b(?:[0-9a-f]{2}:){5}[0-9a-f]{2}\b/gi,'[Bluetooth address]')
+  .replace(/((?:password|pass|psw|ssid)\s*["']?\s*[:=]\s*)[^\n,}]+/gi,'$1[redacted]');
+}
+const rulesByGrill=get('rulesByGrill',{});
+if(selectedPit&&!rulesByGrill[selectedPit]&&Object.keys(rules).length){rulesByGrill[selectedPit]=rules;put('rulesByGrill',rulesByGrill);}
+if(selectedPit)rules=rulesByGrill[selectedPit]||{};
+const canonicalFromController=v=>controllerUnit()==='C'?toF(v):v;
+const canonicalToDisplay=v=>displayUnit==='C'?toC(v):v;
+const displayToCanonical=v=>displayUnit==='C'?toF(v):v;
+function formatCanonical(v){return valid(v)?Math.round(canonicalToDisplay(v))+'°'+displayUnit:'—';}
+function rulesNeedReview(){return !rules.__canonicalF&&keys.some(k=>rules[k]&&(rules[k].low!=null||rules[k].high!=null));}
+function loadGrillRules(){rules=rulesByGrill[selectedPit]||{};armed.clear();drawRules();}
+const wifiRequests=new Map();
+let liveWifi=null;
+function refreshConnectionStatus(){
+ const connected=!!(liveWifi&&liveWifi.pit===selectedPit&&liveWifi.address===ip&&Date.now()-liveWifi.at<15000);
+ $('pmWifiLinkStatus').textContent=connected?'Connected':'Not connected';
+ const bluetooth=$('pmBleLinkStatus').textContent==='Connected';
+ $('pmActiveLinkStatus').textContent=connected?'Wi-Fi':bluetooth?'Bluetooth':'Not connected';
+ $('pmVerifiedAddress').textContent=connected?'Network address: '+liveWifi.address:'';
+ document.querySelectorAll('[data-grill]').forEach(row=>{
+  const label=row.querySelector('.pmWifiState');
+  if(label)label.textContent=connected&&row.dataset.grill===selectedPit?'Wi-Fi connected':'Wi-Fi not connected';
+ });
+}
+function clearGrillConnection(){
+ pending++;busy=false;last=null;liveWifi=null;wifiRequests.clear();
+ controlRequest++;controlPending=false;activeControl=null;temperatureChange=null;temperatureMessage('Choose a temperature, then slide to apply.');
+ $('connectionText').textContent='NO CONNECTION';$('status').className='pvDigitalStatus';
+ $('pmBleLinkStatus').textContent='Not connected';$('pvBluetoothText').textContent='NOT CONNECTED';$('pvBluetoothStatus').className='pvDigitalStatus';
+ window.pitSetupVerification=null;
+ refreshConnectionStatus();
+}
 if(!Array.isArray(cooks))cooks=[];if(!cookHistory||typeof cookHistory!=='object'||Array.isArray(cookHistory))cookHistory={};const legacyCook=get('cook',null);if(legacyCook&&Number.isFinite(legacyCook.start)&&!get('cookMigrated',false)){cooks.push({...legacyCook,id:'legacy-'+legacyCook.start});put('cooks',cooks)}put('cookMigrated',true);
 $('ip').value=ip;
 // Controller commands are sent by the native bridge; visual indicators reflect GetState.
+let activeControl=null,temperatureChange=null;
+const lockhartSetpointsF=[160,180,200,225,250,275,300,325,350,375,400,425,450,500];
 let controlRequest=300000,controlPending=false,displayUnit=get('displayUnit','F')==='C'?'C':'F';
 const toF=c=>c*9/5+32, toC=f=>(f-32)*5/9;
 const controllerUnit=()=>last?.isFahrenheit===false?'C':'F';
@@ -276,7 +441,7 @@ function setDisplayUnit(unit,convertInput=true){
  const prev=displayUnit;displayUnit=unit;put('displayUnit',unit);$('pvUnitSelect').value=unit;$('pvTempUnit').textContent='°'+unit;
  const inp=$('pvTargetTemp');if(convertInput&&prev!==unit&&inp.value!==''){const n=Number(inp.value);if(Number.isFinite(n))inp.value=String(Math.round(unit==='C'?toC(n):toF(n)))}
  inp.min=unit==='C'?'71':'160';inp.max=unit==='C'?'260':'500';inp.step='1';
- drawSetpoint();drawTemps();drawChart();drawRules();
+ updateModelUI();drawSetpoint();drawTemps();drawChart();drawRules();
 }
 $('pvUnitSelect').addEventListener('change',e=>{setDisplayUnit(e.target.value);$('pvNav').classList.remove('open');$('pvScrim').classList.remove('open');$('pvMenuButton').setAttribute('aria-expanded','false')});
 const pvConfirmDialog=$('pvConfirmDialog');
@@ -295,60 +460,85 @@ function toast(message,important=false){
  const el=$('pvToast');el.textContent=message;el.classList.add('show');
  clearTimeout(toast.timer);toast.timer=setTimeout(()=>el.classList.remove('show'),important?4500:2400);
 }
-function commandStatus(message){log(message);if(/FAILED|error|unavailable|invalid|No command response|Connect|must|pending/i.test(message))toast(message,true)}
+function commandStatus(message){log(message);toast(message,true)}
+function temperatureMessage(text){$('pmTemperatureStatus').textContent=text;}
+function targetLabel(change){return change.value+'°'+change.unit;}
+function temperatureFailed(id,text){
+ if(temperatureChange?.id!==id)return;
+ temperatureChange=null;temperatureMessage(text);toast(text,true);
+}
 function sendControl(action,value=0){
- if(controlPending){commandStatus('Another command is pending');return}
- if(!ip||!window.LockhartNative?.control){commandStatus('Control unavailable: install updated Android bridge and connect');return}
+ if(!ensureSafetyAcknowledged())return false;
+ if(controlPending){commandStatus('Please wait for your grill to finish the last change.');return false;}
+ if(!last||!liveWifi||liveWifi.pit!==selectedPit||liveWifi.address!==ip||Date.now()-liveWifi.at>=15000){commandStatus('Check the live connection to this grill before changing controls.');return false;}
+ if(!ip||!window.LockhartNative?.control){commandStatus('Connect to your grill to use these controls.');return false;}
+ if(action==='setTemp'&&!window.LockhartNative?.setTemperature){commandStatus('Please update the app to change the cooking temperature.');return false;}
  controlPending=true;const id=++controlRequest;
- commandStatus('Sending '+action+' to controller…');
- window.LockhartNative.control(ip,action,value,id);
- setTimeout(()=>{if(controlPending&&controlRequest===id){controlPending=false;commandStatus('No command response — verify at grill before retrying')}},8000);
+ activeControl={id,action,value,ip,pit:selectedPit,unit:controllerUnit()};
+ if(action==='setTemp'){
+  temperatureChange={...activeControl,phase:'sending',afterPoll:pending};
+  temperatureMessage('Setting '+targetLabel(temperatureChange)+'…');
+ }
+ try{
+  if(action==='setTemp')window.LockhartNative.setTemperature(ip,value,activeControl.unit==='F',id);
+  else window.LockhartNative.control(ip,action,value,id);
+ }catch(_){controlPending=false;temperatureFailed(id,'Couldn’t send the temperature. Check your connection and try again.');return false;}
+ setTimeout(()=>{if(controlPending&&controlRequest===id){controlPending=false;temperatureFailed(id,'Temperature change not confirmed. Check your grill before trying again.');commandStatus('Your grill didn’t respond. Check it before trying again.');}},25000);
+ return true;
 }
 window.receiveControl=function(id,action,body,error){
- if(id!==controlRequest)return;
+ if(id!==controlRequest||activeControl?.id!==id||activeControl.action!==action||activeControl.pit!==selectedPit||activeControl.ip!==ip)return;
  controlPending=false;
- if(error){commandStatus('FAILED '+action+': '+error);return}
- commandStatus('Controller acknowledged '+action+'; waiting for GetState verification');
+ if(error){temperatureFailed(id,'Temperature change failed. Check your grill and connection, then try again.');commandStatus('Your grill didn’t respond. Check the connection and try again.');return}
+ commandStatus('Request received. Checking your grill…');
  if(action==='powerOn'){const smoke=$('pvSmoke');smoke.classList.remove('puff');void smoke.offsetWidth;smoke.classList.add('puff');setTimeout(()=>smoke.classList.remove('puff'),1700)}
  if(action==='powerOff'){const el=$('pvCoolingText');el.classList.remove('float');void el.offsetWidth;el.classList.add('float');setTimeout(()=>el.classList.remove('float'),1900)}
- if(action==='setTemp'){
-   expectedSetpoint=pendingSetpoint;
-   const requested=expectedSetpoint;
-   commandStatus('Temperature command received; waiting for controller to confirm '+formatTemp(requested));
-   setTimeout(()=>{
-     if(expectedSetpoint===requested){
-       commandStatus('Setpoint not yet confirmed. Check the grill display; monitoring continues.');
-       expectedSetpoint=null;
-     }
-   },15000);
+ if(action==='setTemp'&&temperatureChange?.id===id){
+   temperatureChange.phase='checking';temperatureChange.afterPoll=pending;
+   temperatureMessage('Checking '+targetLabel(temperatureChange)+' on your grill…');
+   setTimeout(()=>temperatureFailed(id,'Temperature change not confirmed. Check your grill display before trying again.'),15000);
  }
  if(action==='lightOn'||action==='lightOff')expectedLight=action==='lightOn';
  if(action==='powerOn')expectedPower=true;
  if(action==='powerOff')expectedPower=false;
  rpc();
 };
-let expectedPower=null,expectedSetpoint=null,expectedLight=null,pendingSetpoint=null;
+let expectedPower=null,expectedLight=null;
 $('pvPowerOn').addEventListener('click',async()=>{
- if(!last||$('connectionText').textContent!=='CONNECTED'){commandStatus('No verified Wi-Fi connection. Open Add a New Smoker, check the saved IP, and tap Test Connection.');rpc();return}
- if(last.moduleIsOn===true){commandStatus('Controller already reports UNIT ON');return}
+ if(!last||$('connectionText').textContent!=='CONNECTED'){commandStatus('Connect your grill to Wi-Fi from My Grills → Connections.');rpc();return}
+ if(last.moduleIsOn===true){commandStatus('Your grill is already on.');return}
  
+ if(!ensureSafetyAcknowledged())return;
+ const grillName=savedPits.find(g=>pitIdentity(g)===selectedPit)?.nickname||'your grill';
+ if(!await askConfirm('Turn on '+grillName+'? Confirm the grill is attended and safe to start.'))return;
  sendControl('powerOn');
 });
 $('pvPowerOff').addEventListener('click',async()=>{
- if(!last||$('connectionText').textContent!=='CONNECTED'){commandStatus('No verified Wi-Fi connection. Check the saved IP and tap Test Connection.');rpc();return}
+ if(!last||$('connectionText').textContent!=='CONNECTED'){commandStatus('Connect your grill to Wi-Fi from My Grills → Connections.');rpc();return}
  
  sendControl('powerOff');
 });
 async function applyTargetTemperature(){
- const n=Number($('pvTargetTemp').value),native=Math.round(fromDisplay(n));
- if(!Number.isFinite(n)||n<Number($('pvTargetTemp').min)||n>Number($('pvTargetTemp').max)||native<70||native>500){commandStatus('Enter a valid target temperature');return}
- if(!last||!(last.moduleIsOn===true||last.moduleIsOn===1)){commandStatus('Grill must report UNIT ON to change temperature');return}
- if(!await askConfirm('Set grill target to '+n+'°'+displayUnit+'?'))return;
- pendingSetpoint=native;expectedSetpoint=null;sendControl('setTemp',native);
+ if(!ensureSafetyAcknowledged())return;
+ if(controlPending){commandStatus('Please wait for your grill to finish the last change.');return;}
+ const input=$('pvTargetTemp'),n=Number(input.value),unit=controllerUnit(),pit=selectedPit,address=ip;
+ if(input.value.trim()===''||!Number.isFinite(n)||n<Number(input.min)||n>Number(input.max)){commandStatus('Enter a valid cooking temperature.');return;}
+ if(!last||$('connectionText').textContent!=='CONNECTED'){commandStatus('Connect your grill to Wi-Fi before changing the temperature.');return;}
+ if(!(last.moduleIsOn===true||last.moduleIsOn===1)){commandStatus('Turn on your grill before changing the temperature.');return;}
+ const desired=Math.round(fromDisplay(n));
+ const accepted=acceptedGrillTargets(unit);
+ const target=accepted.length?accepted.reduce((a,b)=>Math.abs(b-desired)<Math.abs(a-desired)?b:a):desired;
+ const shown=Math.round(unit===displayUnit?target:displayUnit==='C'?toC(target):toF(target));
+ const text=(target!==desired?'Your grill uses preset temperatures. ':'')+'Set grill target to '+shown+'°'+displayUnit+'?';
+ if(!await askConfirm(text))return;
+ if(pit!==selectedPit||address!==ip||unit!==controllerUnit()||!last||!(last.moduleIsOn===true||last.moduleIsOn===1)||$('connectionText').textContent!=='CONNECTED'){
+  commandStatus('Your grill connection changed. Check the temperature and try again.');return;
+ }
+ if(sendControl('setTemp',target))input.value=shown;
 }
 $('pvLight').addEventListener('click',()=>{
  if(!last){commandStatus('Connect to grill before controlling the light');return}
- if(typeof last.lightState!=='boolean'&&last.lightState!==0&&last.lightState!==1){commandStatus('Light state unavailable from controller');return}
+ if(typeof last.lightState!=='boolean'&&last.lightState!==0&&last.lightState!==1){commandStatus('The grill light status is unavailable.');return}
  const on=last.lightState===true||last.lightState===1;
  sendControl(on?'lightOff':'lightOn');
 });
@@ -357,11 +547,13 @@ function drawLight(){const el=$('pvLight'),known=last&&(typeof last.lightState==
 let primeRequest=200000,primeHolding=false,primeHoldTimer=null,primePointerDown=false,primeActive=false,primeUntil=0;
 function primeStatus(s){document.body.classList.toggle('pvPriming',primeActive);log(s);if(/error|failed|connect/i.test(s))toast(s,true)}
 function primeSend(action,seconds){
+ if(!ensureSafetyAcknowledged())return false;
+ if(runtimeInfo.experimentalPriming===false){toast('Use the grill panel to prime. Remote priming is unavailable in this release.',true);return false;}
  if(!window.LockhartNative||!window.LockhartNative.prime||!last){primeStatus('Connect to grill before priming');return false}
  window.LockhartNative.prime(ip,action,seconds,++primeRequest);return true
 }
 window.receivePrime=function(id,action,body,error){
- if(error){primeStatus('Prime '+action+' error: '+error);if(action==='start')primeActive=false;return}
+ if(error){primeStatus('Priming failed. Check your grill before trying again.');if(action==='start')primeActive=false;return}
  if(action==='start'){primeActive=true;primeStatus('Prime command sent · check auger')}
  else if(action==='stop'){primeActive=false;primeUntil=0;primeStatus('Stop command sent · verify auger stopped')}
 };
@@ -417,7 +609,7 @@ function pmApplyTransport(mode){
  const label=mode==='bluetooth'?'Bluetooth Only — native Wi-Fi requests blocked; waiting for BLE frames':mode==='wifi'?'Wi-Fi Only — local HTTP dashboard':'Automatic — Wi-Fi dashboard; BLE fallback not implemented';
  document.getElementById('pmTransportStatus').textContent=label;
  if(mode==='bluetooth'){
-  busy=false;pending++;document.getElementById('connectionText').textContent='BLE DIAGNOSTIC';
+  busy=false;pending++;document.getElementById('connectionText').textContent='NOT CONNECTED';
   document.getElementById('status').className='pvDigitalStatus';
   if(document.getElementById('backgroundAlerts').checked){document.getElementById('backgroundAlerts').checked=false;}
   if(window.LockhartNative?.configureMonitoring)window.LockhartNative.configureMonitoring(false,'','{}','{}');
@@ -425,11 +617,13 @@ function pmApplyTransport(mode){
  log('TRANSPORT '+mode+' — '+label);
 }
 (function(){const select=document.getElementById('pmTransportMode');select.addEventListener('change',()=>pmApplyTransport(select.value));pmApplyTransport(select.value)})();
-function rpc(){if(window.pmTransportMode==='bluetooth'){return;}if(busy||!ip)return;busy=true;const id=++pending;window.LockhartNative.rpc(ip,'GetState','{}',id);setTimeout(()=>{if(busy&&id===pending){busy=false;$('connectionText').textContent='NO CONNECTION';if($('pmTestResult')&&ip)$('pmTestResult').textContent='No response from '+ip+'. Confirm phone and smoker are on the same Wi-Fi, then retry.';$('status').className='pvDigitalStatus';drawUnit();renderPitDetails();log('No response from grill; retaining last confirmed state')}},6000)}
-window.receiveRpc=function(id,body,error){if(id!==pending)return;busy=false;if(error){$('connectionText').textContent='NO CONNECTION';if($('pmTestResult')&&ip)$('pmTestResult').textContent='No response from '+ip+'. Confirm phone and smoker are on the same Wi-Fi, then retry.';$('status').className='pvDigitalStatus';drawUnit();renderPitDetails();log('GetState '+ip+': '+error);if($('pmTestResult'))$('pmTestResult').textContent='Connection error at '+ip+': '+error;return}try{const outer=JSON.parse(body);if(outer.error&&outer.error.code!==0)throw Error('RPC '+outer.error.message);let d=outer.error&&outer.error.message?JSON.parse(outer.error.message):(outer.result||outer);if(!('grillTemp'in d))throw Error('No temperature data');last=d;const verifiedGrill=savedPits.find(g=>g.ip&&g.ip===ip);if(verifiedGrill&&!verifiedGrill.wifiConfigured){verifiedGrill.wifiConfigured=true;put('savedPits',savedPits);renderSavedPits()}const now=Date.now()/1000;history.push({t:now,isFahrenheit:d.isFahrenheit,...Object.fromEntries(keys.map(k=>[k,d[k]]))});history=history.filter(x=>x.t>now-86400).slice(-18000);put('history',history);for(const c of cooks.filter(c=>!c.end)){const samples=cookHistory[c.id]||(cookHistory[c.id]=[]);samples.push({t:now,isFahrenheit:d.isFahrenheit,...Object.fromEntries(keys.map(k=>[k,d[k]]))});if(samples.length>1800)samples.splice(0,samples.length-1800)}if(cooks.some(c=>!c.end)){try{put('cookHistory',cookHistory)}catch(storageError){log('Cook history storage full: '+storageError.message)}}$('connectionText').textContent='CONNECTED';if($('pmTestResult'))$('pmTestResult').textContent='Connection verified: smoker responded to GetState.';$('status').className='pvDigitalStatus ok';drawSetpoint();drawUnit();drawLight();renderPitDetails();drawTemps();drawChart();drawFlags();checkLimits();
- if(expectedPower!==null&&typeof d.moduleIsOn==='boolean'&&d.moduleIsOn===expectedPower){commandStatus('VERIFIED: controller reports UNIT '+(expectedPower?'ON':'OFF'));expectedPower=null}
- if(expectedSetpoint!==null&&d.grillSetTemp===expectedSetpoint){commandStatus('VERIFIED: grill setpoint '+formatTemp(expectedSetpoint));expectedSetpoint=null}
- if(expectedLight!==null&&(d.lightState===expectedLight||d.lightState===Number(expectedLight))){commandStatus('VERIFIED: light '+(expectedLight?'ON':'OFF'));expectedLight=null}}catch(e){$('connectionText').textContent='NO CONNECTION';if($('pmTestResult')&&ip)$('pmTestResult').textContent='No response from '+ip+'. Confirm phone and smoker are on the same Wi-Fi, then retry.';$('status').className='pvDigitalStatus';drawUnit();renderPitDetails();log('GetState parse: '+e.message);if($('pmTestResult'))$('pmTestResult').textContent='Controller responded, but state could not be read: '+e.message}};
+function rpc(){if(window.pmTransportMode==='bluetooth'){return;}if(busy||!ip)return;busy=true;const id=++pending;wifiRequests.clear();wifiRequests.set(id,{pit:selectedPit,address:ip});syncGrillProfile();window.LockhartNative.rpc(ip,'GetState','{}',id);setTimeout(()=>{if(busy&&id===pending){liveWifi=null;refreshConnectionStatus();busy=false;$('connectionText').textContent='NO CONNECTION';if($('pmTestResult')&&ip)$('pmTestResult').textContent='No response from '+ip+'. Confirm phone and smoker are on the same Wi-Fi, then retry.';$('status').className='pvDigitalStatus';drawUnit();renderPitDetails();log('No response from grill; retaining last confirmed state')}},6000)}
+window.receiveRpc=function(id,body,error){if(id!==pending)return;busy=false;if(error){$('connectionText').textContent='NO CONNECTION';if($('pmTestResult')&&ip)$('pmTestResult').textContent='No response from '+ip+'. Confirm phone and smoker are on the same Wi-Fi, then retry.';$('status').className='pvDigitalStatus';drawUnit();renderPitDetails();log('GetState '+ip+': '+error);if($('pmTestResult'))$('pmTestResult').textContent='Connection error at '+ip+': '+error;return}try{const outer=JSON.parse(body);if(outer.error&&outer.error.code!==0)throw Error('RPC '+outer.error.message);let d=normalizeModelState(outer.error&&outer.error.message?JSON.parse(outer.error.message):(outer.result||outer));if(!['moduleIsOn','grillTemp','grillSetTemp','smokerActTemp','p_1_Temp'].some(k=>k in d))throw Error('Waiting for grill readings');last=d;/* Wi-Fi reachability is not provisioning; do not set wifiSetupVerified. */const now=Date.now()/1000;history.push({t:now,isFahrenheit:d.isFahrenheit,...Object.fromEntries(keys.map(k=>[k,d[k]]))});history=history.filter(x=>x.t>now-86400).slice(-18000);put('history',history);for(const c of cooks.filter(c=>!c.end)){const samples=cookHistory[c.id]||(cookHistory[c.id]=[]);samples.push({t:now,isFahrenheit:d.isFahrenheit,...Object.fromEntries(keys.map(k=>[k,d[k]]))});if(samples.length>1800)samples.splice(0,samples.length-1800)}if(cooks.some(c=>!c.end)){try{put('cookHistory',cookHistory)}catch(storageError){log('Cook history storage full: '+storageError.message)}}$('connectionText').textContent='CONNECTED';if($('pmTestResult'))$('pmTestResult').textContent='Your grill is connected.';$('status').className='pvDigitalStatus ok';drawSetpoint();drawUnit();drawLight();renderPitDetails();drawTemps();drawChart();drawFlags();checkLimits();
+ if(expectedPower!==null&&typeof d.moduleIsOn==='boolean'&&d.moduleIsOn===expectedPower){commandStatus('Your grill is '+(expectedPower?'on.':'off.'));expectedPower=null}
+ if(temperatureChange&&temperatureChange.phase==='checking'&&temperatureChange.pit===selectedPit&&temperatureChange.ip===ip&&id>temperatureChange.afterPoll&&temperatureChange.unit===(d.isFahrenheit===false?'C':'F')&&Number(d.grillSetTemp)===temperatureChange.value){
+  const confirmed=temperatureChange;temperatureChange=null;temperatureMessage('Temperature set to '+targetLabel(confirmed)+'.');log('Temperature confirmed request='+confirmed.id+' target='+confirmed.value+' unit='+confirmed.unit);
+ }
+ if(expectedLight!==null&&(d.lightState===expectedLight||d.lightState===Number(expectedLight))){commandStatus('Grill light '+(expectedLight?'ON':'OFF'));expectedLight=null}}catch(e){$('connectionText').textContent='NO CONNECTION';if($('pmTestResult')&&ip)$('pmTestResult').textContent='No response from '+ip+'. Confirm phone and smoker are on the same Wi-Fi, then retry.';$('status').className='pvDigitalStatus';drawUnit();renderPitDetails();log('GetState parse: '+e.message);if($('pmTestResult'))$('pmTestResult').textContent='Controller responded, but state could not be read: '+e.message}};
 // Discovery does not imply an established BLE connection. Future native GATT support
 // can call this callback only after connection state is confirmed.
 window.pvBluetoothConnectionChanged=function(connected){
@@ -439,7 +633,7 @@ window.pvBluetoothConnectionChanged=function(connected){
 };
 function drawUnit(){const on=last&&(last.moduleIsOn===true||last.moduleIsOn===1),off=last&&(last.moduleIsOn===false||last.moduleIsOn===0);document.body.classList.toggle('pvUnitOn',!!on);document.body.classList.toggle('pvUnitOff',!!off)}
 function formatTemp(v){return valid(v)?Math.round(toDisplay(v))+'°'+displayUnit:'—'}
-function drawSetpoint(){const on=last&&(last.moduleIsOn===true||last.moduleIsOn===1);const v=on?last.grillSetTemp:null;$('pvSetpoint').textContent=valid(v)&&v>0?formatTemp(v):''}
+function drawSetpoint(){if(temperatureChange&&temperatureChange.pit===selectedPit){const c=temperatureChange;temperatureMessage((c.phase==='sending'?'Setting ':'Checking ')+targetLabel(c)+'… Grill reports '+formatTemp(last?.grillSetTemp)+'.');}const on=last&&(last.moduleIsOn===true||last.moduleIsOn===1);const v=on?last.grillSetTemp:null;$('pvSetpoint').textContent=valid(v)&&v>0?formatTemp(v):''}
 function drawTemps(){
  function tile(k,i){
   const value=last?.[k];
@@ -449,7 +643,7 @@ function drawTemps(){
   return '<div class="tile"><div class="muted">'+names[i]+'</div><div class="value">'+shown+'</div></div>';
  }
  $('chambers').innerHTML=keys.slice(0,2).map((k,i)=>tile(k,i)).join('');
- $('probes').innerHTML=keys.slice(2).map((k,i)=>tile(k,i+2)).join('');
+ const count=selectedGrillProfile().probes??4;$('probes').innerHTML=keys.slice(2,2+count).map((k,i)=>tile(k,i+2)).join('')||'<p class="muted">This model has no meat probes.</p>';
 }
 
 const controllerFlags=[
@@ -476,17 +670,17 @@ function drawFlags(){
    return '<div class="pvFlagCard"><div class="pvFlagName">'+label+'</div><div class="pvFlagKey">'+key+'</div><div class="pvFlagValue '+(active?(isError?'pvFlagAlert':'pvFlagActive'):'')+'">'+state+'</div><div class="pvFlagDefinition">'+definition+'</div></div>';
  }).join('');
 }
-function drawRules(){let s='';keys.forEach((k,i)=>{const r=rules[k]||{};s+='<div class="rule"><label>'+names[i]+'</label><div class="row"><input type="number" min="0" max="600" id="lo'+i+'" placeholder="Low" value="'+(r.low==null?'':Math.round(toDisplay(r.low)))+'"><input type="number" min="0" max="600" id="hi'+i+'" placeholder="High" value="'+(r.high==null?'':Math.round(toDisplay(r.high)))+'"></div></div>'});$('rules').innerHTML=s}
-$('saveRules').onclick=()=>{let r={};for(let i=0;i<6;i++){let low=$('lo'+i).value,high=$('hi'+i).value;if(low&&(!Number.isFinite(+low)||+low<0||+low>600))return toast('Invalid low limit');if(high&&(!Number.isFinite(+high)||+high<0||+high>600))return toast('Invalid high limit');if(low&&high&&+low>=+high)return toast('Low must be below high');r[keys[i]]={low:low?Math.round(fromDisplay(+low)):null,high:high?Math.round(fromDisplay(+high)):null}}rules=r;armed.clear();put('rules',rules);syncMonitoring();toast('Alert limits saved')};
-function checkLimits(){if(!last)return;keys.forEach((k,i)=>{const v=last[k],r=rules[k]||{};if(!valid(v))return;for(const side of ['low','high']){const n=r[side];if(n===null||n===undefined)continue;const key=k+side,hit=side==='low'?v<=n:v>=n;if(hit&&!armed.has(key)){armed.add(key);if(!$('backgroundAlerts').checked)alertUser(names[i]+' '+side+' alert: '+formatTemp(v)+' (limit '+formatTemp(n)+')')}if(!hit&&(side==='low'?v>n+5:v<n-5))armed.delete(key)}})}
+function drawRules(){let s=rulesNeedReview()?'<p class="note">Review and save your existing alert limits before enabling alerts. They have been preserved, but their previous temperature unit needs confirmation.</p>':'';keys.forEach((k,i)=>{const r=rules[k]||{};s+='<div class="rule"><label>'+names[i]+'</label><div class="row"><input type="number" min="0" max="600" id="lo'+i+'" placeholder="Low" value="'+(r.low==null?'':Math.round(rules.__canonicalF?canonicalToDisplay(r.low):toDisplay(r.low)))+'"><input type="number" min="0" max="600" id="hi'+i+'" placeholder="High" value="'+(r.high==null?'':Math.round(rules.__canonicalF?canonicalToDisplay(r.high):toDisplay(r.high)))+'"></div></div>'});$('rules').innerHTML=s}
+$('saveRules').onclick=()=>{let r={};for(let i=0;i<6;i++){let low=$('lo'+i).value,high=$('hi'+i).value;if(low&&(!Number.isFinite(+low)||+low<0||+low>600))return toast('Invalid low limit');if(high&&(!Number.isFinite(+high)||+high<0||+high>600))return toast('Invalid high limit');if(low&&high&&+low>=+high)return toast('Low must be below high');r[keys[i]]={low:low?Math.round(displayToCanonical(+low)):null,high:high?Math.round(displayToCanonical(+high)):null}}r.__canonicalF=true;rules=r;rulesByGrill[selectedPit||'unbound']=r;armed.clear();put('rules',rules);put('rulesByGrill',rulesByGrill);syncMonitoring();toast('Alert limits saved')};
+function checkLimits(){if(!last||rulesNeedReview())return;keys.forEach((k,i)=>{const v=typeof last[k]==='number'?canonicalFromController(last[k]):null,r=rules[k]||{};if(!valid(v))return;for(const side of ['low','high']){const n=r[side];if(n===null||n===undefined)continue;const key=k+side,hit=side==='low'?v<=n:v>=n;if(hit&&!armed.has(key)){armed.add(key);if(!$('backgroundAlerts').checked)alertUser(names[i]+' '+side+' alert: '+formatCanonical(v)+' (limit '+formatCanonical(n)+')')}if(!hit&&(side==='low'?v>n+5:v<n-5))armed.delete(key)}})}
 function legend(){ $('legend').innerHTML=keys.map((k,i)=>'<label class="pvHistoryToggle"><input type="checkbox" data-i="'+i+'" '+(selected[i]?'checked':'')+'><span>'+names[i]+'</span></label>').join('');$('legend').querySelectorAll('input').forEach(el=>el.onchange=()=>{selected[+el.dataset.i]=el.checked;put('selected',selected);drawChart()})}
-function drawChart(){const c=$('chart'),w=Math.max(280,c.clientWidth),h=220,dpr=devicePixelRatio||1;c.width=w*dpr;c.height=h*dpr;const ctx=c.getContext('2d');ctx.scale(dpr,dpr);const cook=cooks.find(c=>c.id===$('historyCook').value),now=Date.now()/1000,finish=cook?(cook.end||now):now,pts=(cook?(cookHistory[cook.id]||[]):[]).filter(p=>p.t>=Math.max(cook.start,finish-Number($('range').value))&&p.t<=finish),values=pts.flatMap(p=>keys.filter((k,i)=>selected[i]&&valid(p[k])).map(k=>p[k]));if(values.length<2){ctx.fillStyle='#b5c5d4';ctx.fillText(cook?'Waiting for this cook’s readings…':'Select a cook session',15,28);return}const min=Math.max(0,Math.floor((Math.min(...values)-20)/25)*25),max=Math.ceil((Math.max(...values)+20)/25)*25||100;for(let i=0;i<5;i++){let y=14+i*45;ctx.strokeStyle='#30404d';ctx.beginPath();ctx.moveTo(38,y);ctx.lineTo(w-8,y);ctx.stroke();ctx.fillStyle='#9eafbf';ctx.fillText(Math.round(toDisplay(max-(max-min)*i/4))+'°',3,y+4)}const start=Math.max(cook.start,finish-Number($('range').value));keys.forEach((k,i)=>{if(!selected[i])return;ctx.beginPath();ctx.strokeStyle=colors[i];ctx.lineWidth=2;let active=false;pts.forEach(p=>{if(!valid(p[k])){active=false;return}let x=38+(w-48)*(p.t-start)/(finish-start||1),y=14+180*(max-p[k])/(max-min||1);if(!active)ctx.moveTo(x,y);else ctx.lineTo(x,y);active=true});ctx.stroke()})}
+function drawChart(){const c=$('chart'),w=Math.max(280,c.clientWidth),h=220,dpr=devicePixelRatio||1;c.width=w*dpr;c.height=h*dpr;const ctx=c.getContext('2d');ctx.scale(dpr,dpr);const cook=cooks.find(c=>c.id===$('historyCook').value),now=Date.now()/1000,finish=cook?(cook.end||now):now,pts=(cook?(cookHistory[cook.id]||[]):[]).filter(p=>p.t>=Math.max(cook.start,finish-Number($('range').value))&&p.t<=finish).map(p=>({...p,...Object.fromEntries(keys.map(k=>[k,typeof p[k]==='number'?(p.isFahrenheit===false?toF(p[k]):p[k]):null]))})),values=pts.flatMap(p=>keys.filter((k,i)=>selected[i]&&valid(p[k])).map(k=>p[k]));if(values.length<2){ctx.fillStyle='#b5c5d4';ctx.fillText(cook?'Waiting for this cook’s readings…':'Select a cook session',15,28);return}const min=Math.max(0,Math.floor((Math.min(...values)-20)/25)*25),max=Math.ceil((Math.max(...values)+20)/25)*25||100;for(let i=0;i<5;i++){let y=14+i*45;ctx.strokeStyle='#30404d';ctx.beginPath();ctx.moveTo(38,y);ctx.lineTo(w-8,y);ctx.stroke();ctx.fillStyle='#9eafbf';ctx.fillText(Math.round(canonicalToDisplay(max-(max-min)*i/4))+'°',3,y+4)}const start=Math.max(cook.start,finish-Number($('range').value));keys.forEach((k,i)=>{if(!selected[i])return;ctx.beginPath();ctx.strokeStyle=colors[i];ctx.lineWidth=2;let active=false;pts.forEach(p=>{if(!valid(p[k])){active=false;return}let x=38+(w-48)*(p.t-start)/(finish-start||1),y=14+180*(max-p[k])/(max-min||1);if(!active)ctx.moveTo(x,y);else ctx.lineTo(x,y);active=true});ctx.stroke()})}
 function drawCook(){const now=Date.now()/1000;$('cookInfo').innerHTML=cooks.map(c=>{const sec=Math.max(0,Math.floor((c.end??now)-c.start));const elapsed=Math.floor(sec/3600)+'h '+Math.floor(sec%3600/60)+'m '+sec%60+'s';return '<div class="pvEntry"><div class="pvEntryText"><strong>'+escapeHTML(c.name)+'</strong><small>'+elapsed+(c.end?' · Finished':' · Running')+'</small></div><button data-cook-id="'+escapeHTML(c.id)+'">'+(c.end?'Remove':'End')+'</button></div>'}).join('')||'<p class="muted">No cook sessions</p>';$('cookInfo').querySelectorAll('button').forEach(b=>b.onclick=async()=>{const c=cooks.find(c=>c.id===b.dataset.cookId);if(!c)return;if(c.end){if(!await askConfirm('Remove this cook and its saved temperature history?'))return;cooks=cooks.filter(x=>x.id!==c.id);delete cookHistory[c.id];put('cookHistory',cookHistory)}else c.end=Date.now()/1000;put('cooks',cooks);drawCook();refreshCookHistory()})}
 $('startCook').onclick=()=>{cooks.push({id:'cook-'+Date.now()+'-'+Math.random().toString(36).slice(2),name:$('cookName').value.trim()||'Cook',start:Date.now()/1000});$('cookName').value='';put('cooks',cooks);drawCook();refreshCookHistory(true)};
 function drawTimers(){const now=Date.now()/1000;$('timers').innerHTML=timers.map(x=>{const s=Math.max(0,Math.ceil(x.end-now));return '<div class="row" style="justify-content:space-between;margin:10px 0"><span>'+escapeHTML(x.name)+' · '+Math.floor(s/60)+':'+String(s%60).padStart(2,'0')+'</span><button data-id="'+x.id+'">Remove</button></div>'}).join('')||'<p class="muted">No timers</p>';$('timers').querySelectorAll('button').forEach(b=>b.onclick=()=>{timers=timers.filter(t=>t.id!==b.dataset.id);put('timers',timers);syncMonitoring();drawTimers()})}
 function escapeHTML(x){return String(x).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 $('startTimer').onclick=()=>{const m=+$('minutes').value;if(!Number.isFinite(m)||m<1||m>1440)return toast('Enter 1–1440 minutes');timers.push({id:'timer-'+Date.now()+'-'+Math.random().toString(36).slice(2),name:$('timerName').value.trim()||'Timer',end:Date.now()/1000+m*60});put('timers',timers);syncMonitoring();drawTimers()};
-function tick(){if(primeUntil&&Date.now()>=primeUntil){primeUntil=0;primeStatus('Prime timer elapsed; waiting for native auto-stop confirmation')}drawCook();drawTimers();const now=Date.now()/1000;timers.forEach(x=>{if(now>=x.end&&!timerFired.has(x.id)){timerFired.add(x.id);if(!$('backgroundAlerts').checked)alertUser('Timer finished: '+x.name)}})}
+function tick(){if(primeUntil&&Date.now()>=primeUntil){primeUntil=0;primeStatus('Finishing priming…')}drawCook();drawTimers();const now=Date.now()/1000;timers.forEach(x=>{if(now>=x.end&&!timerFired.has(x.id)){timerFired.add(x.id);if(!$('backgroundAlerts').checked)alertUser('Timer finished: '+x.name)}})}
 function refreshCookHistory(selectNewest=false){const sel=$('historyCook'),old=sel.value;sel.innerHTML=cooks.slice().reverse().map(c=>'<option value="'+escapeHTML(c.id)+'">'+escapeHTML(c.name)+(c.end?' · Finished':' · Running')+'</option>').join('');if(!cooks.length)sel.innerHTML='<option value="">No cook sessions</option>';if(!selectNewest&&cooks.some(c=>c.id===old))sel.value=old;const c=cooks.find(c=>c.id===sel.value);$('historyInfo').textContent=c?'Showing saved readings for '+c.name+'. Readings are recorded while the app is connected and polling.':'Start a cook to begin recording temperature history.';drawChart()}
 $('historyCook').onchange=()=>refreshCookHistory();
 // Slide-to-confirm setpoint: dragging is required; keyboard users can focus the handle and press Enter.
@@ -503,7 +697,7 @@ $('saveIP').onclick=()=>{
  ip=address;put('ip',ip);$('ip').value=address;$('pitIP').value=address;
  $('pmTestResult').textContent='Connecting to your grill…';pending++;busy=false;syncMonitoring();rpc();toast('Connecting to your grill…');
 };$('range').onchange=drawChart;
-$('export').onclick=()=>{const c=cooks.find(c=>c.id===$('historyCook').value);if(!c)return toast('Select a cook first');const csv=['time,'+keys.join(','),...(cookHistory[c.id]||[]).map(x=>[new Date(x.t*1000).toISOString(),...keys.map(k=>x[k]??'')].join(','))].join('\n');const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));a.download='pitvoss-'+c.name.replace(/[^a-z0-9_-]/gi,'_')+'-history.csv';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)};
+$('export').onclick=()=>{const c=cooks.find(c=>c.id===$('historyCook').value);if(!c)return toast('Select a cook first');const csv=['time,temperature_unit,'+keys.join(','),...(cookHistory[c.id]||[]).map(x=>[new Date(x.t*1000).toISOString(),'F',...keys.map(k=>typeof x[k]==='number'?(x.isFahrenheit===false?toF(x[k]):x[k]):'')].join(','))].join('\n');const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));a.download='pit-master-controller-'+c.name.replace(/[^a-z0-9_-]/gi,'_')+'-history.csv';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)};
 window.monitoringResult=(enabled,message)=>{
  $('backgroundAlerts').checked=enabled;
  put('backgroundAlerts',enabled);
@@ -515,7 +709,7 @@ function syncMonitoring(){
  if(window.pmTransportMode==='bluetooth' && enabled){$('backgroundAlerts').checked=false;toast('Wi-Fi monitoring disabled in Bluetooth Only mode',true);return;}
  put('backgroundAlerts',enabled);
  $('monitorStatus').textContent=enabled?'Background monitoring enabled':'Monitoring off';
- if(window.LockhartNative?.configureMonitoring)window.LockhartNative.configureMonitoring(enabled,ip,JSON.stringify(rules),JSON.stringify(timers));
+ if(window.LockhartNative?.configureMonitoring)window.LockhartNative.configureMonitoring(enabled,ip,JSON.stringify({...rules,__displayUnit:displayUnit,__grillId:selectedPit,...(rulesNeedReview()?Object.fromEntries(keys.map(k=>[k,{low:null,high:null}])):{})}),JSON.stringify(timers));
  else if(enabled)toast('Reinstall the Android update to enable background notifications',true);
 }
 $('backgroundAlerts').checked=get('backgroundAlerts',false);
@@ -524,7 +718,7 @@ drawRules();legend();drawSetpoint();drawUnit();drawCook();drawTimers();refreshCo
 
 
 // Native BLE discovery; pairing/provisioning intentionally not claimed.
-let foundPits=[],savedPits=get('savedPits',[]),selectedPit=get('selectedPit','');
+
 if(!Array.isArray(savedPits))savedPits=[];
 const pitPrefixes=['PBG','PBM','PBL','PBC'];
 function isPitBossBle(d){const n=(d.name||'').trim().toUpperCase();return /^(PBG|PBM|PBL|PBC)(?:[-_\s]|[0-9]|$)/.test(n)||/^PIT\s*BOSS(?:[-_\s]|$)/.test(n)||/^SMOKE\s*IT(?:[-_\s]|$)/.test(n);}
@@ -538,6 +732,7 @@ function renderPitList(){
   put('selectedPit',selectedPit);
   $('pitNickname').value=d.name||'My Pit Boss';
   const existing=savedPits.find(x=>x.address===d.address);
+  $('pmGrillModel').value=existing?.model||'__other__';$('pmOtherModelLabel').hidden=$('pmGrillModel').value!=='__other__';
   const knownIp=existing?.ip||'';
   if(knownIp){$('ip').value=knownIp;$('pitIP').value=knownIp;}
   const info=$('selectedBleInfo');info.style.display='block';
@@ -577,12 +772,141 @@ function renderPitDetails(){
  panel.innerHTML='<dl>'+lines.map(([k,v])=>'<dt>'+escapeHTML(k)+'</dt><dd>'+escapeHTML(v)+'</dd>').join('')+'</dl>';
 }
 const pmWifiIcon='<span class="pmWifiConnected" title="Wi-Fi configured" aria-label="Wi-Fi configured"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 8.5a16 16 0 0 1 20 0M5 12a11 11 0 0 1 14 0M8.5 15.5a6 6 0 0 1 7 0"/><circle cx="12" cy="19" r="1.2" fill="currentColor" stroke="none"/></svg></span>';
-function renderSavedPits(){
- $('savedPits').innerHTML=savedPits.map(d=>{const key=escapeHTML(pitIdentity(d)),configured=d.wifiConfigured===true;return '<div class="pvEntry"><div class="pvEntryText"><strong>'+escapeHTML(d.nickname)+'</strong>'+(configured?pmWifiIcon:'')+'</div><div class="pmActionRow"><button data-saved="'+key+'">'+(pitIdentity(d)===selectedPit?'Selected':'View / Use')+'</button>'+(configured?'':'<button class="pmWifiAction" data-addwifi="'+key+'">Add Wi-Fi</button>')+'</div></div>';}).join('')||'<p class="muted">No saved grills yet</p>';
- document.querySelectorAll('[data-saved]').forEach(b=>b.onclick=()=>{const d=savedPits.find(x=>pitIdentity(x)===b.dataset.saved);if(!d)return;selectedPit=b.dataset.saved;$('pitNickname').value=d.nickname;$('pitIP').value=d.ip||'';put('selectedPit',selectedPit);if(d.ip){ip=d.ip;put('ip',ip);$('ip').value=ip;last=null;rpc()}renderSavedPits()});
- document.querySelectorAll('[data-addwifi]').forEach(b=>b.onclick=()=>{const d=savedPits.find(x=>pitIdentity(x)===b.dataset.addwifi);if(!d)return;selectedPit=pitIdentity(d);put('selectedPit',selectedPit);$('pitNickname').value=d.nickname;$('pitIP').value=d.ip||'';$('ip').value=d.ip||'';if(d.ip){ip=d.ip;put('ip',ip)}renderSavedPits();toast('Make sure your grill and phone are on the same home Wi-Fi. Connecting now…',true);$('saveIP').click()});
- renderPitDetails();
+/* pmWifiTruthV8: connection state is not proof of Wi-Fi provisioning. */
+savedPits.forEach(d=>{if(Object.prototype.hasOwnProperty.call(d,'wifiConfigured'))delete d.wifiConfigured;});put('savedPits',savedPits);
+
+const pmWifiIconV8='<span class="pmWifiConnected" title="Wi-Fi verified" aria-label="Wi-Fi verified"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 8.5a16 16 0 0 1 20 0M5 12a11 11 0 0 1 14 0M8.5 15.5a6 6 0 0 1 7 0"/><circle cx="12" cy="19" r="1.2" fill="currentColor" stroke="none"/></svg></span>';
+/* pmWifiSetupVisibleV9 */
+savedPits.forEach(g=>{if('wifiConfigured' in g)delete g.wifiConfigured;});put('savedPits',savedPits);
+function updateGrillHeading(){
+ const d=savedPits.find(g=>pitIdentity(g)===selectedPit);
+ $('pmDashboardGrill').textContent=d?.nickname||'My Grill';
 }
+function chooseSavedGrill(d){
+ if((primeActive||$('pmWifiProvisionButton').disabled)&&selectedPit!==pitIdentity(d)){toast('Wait for Wi-Fi setup to finish before switching grills.',true);return false;}
+ const changed=selectedPit!==pitIdentity(d);
+ selectedPit=pitIdentity(d);put('selectedPit',selectedPit);
+ $('pitNickname').value=d.nickname;$('pitIP').value=d.ip||'';
+ ip=d.ip||'';put('ip',ip);$('ip').value=ip;
+ if(changed){clearGrillConnection();loadGrillRules();}
+ $('pmGrillModel').value=d.model||'PB2180LK';$('pmOtherModel').value=d.modelLabel||'';syncGrillProfile();updateModelUI();
+ if(d.address&&window.LockhartNative?.selectBleGrill)window.LockhartNative.selectBleGrill(d.address);
+ if(ip)rpc();
+ renderSavedPits();return true;
+}
+function openGrillConnections(d){
+ if(chooseSavedGrill(d)===false)return;
+ liveWifi=null;pending++;busy=false;wifiRequests.clear();refreshConnectionStatus();if(ip)rpc();
+ $('pmConnectionModel').value=d.model||'PB2180LK';updateModelUI();
+ $('pmConnectionsGrill').textContent=d.nickname;
+ $('pmWifiPassword').value='';
+ if(!$('pmWifiProvisionButton').disabled)$('pmWifiProvisionStatus').textContent='Enter your home Wi-Fi details to get started.';
+ if(!$('pmConnectionsDialog').open)$('pmConnectionsDialog').showModal();
+}
+function renderSavedPits(){
+ $('savedPits').innerHTML=savedPits.map(d=>{
+  const key=escapeHTML(pitIdentity(d)),active=pitIdentity(d)===selectedPit;
+  return '<div class="pvEntry pmWifiGrillRow'+(active?' pmGrillSelected':'')+'" data-grill="'+key+'" tabindex="0" aria-label="'+escapeHTML(d.nickname)+(active?', current grill':'')+'"><div class="pmWifiGrillName"><strong>'+escapeHTML(d.nickname)+'</strong><small style="display:block;color:#a9bbc7">'+escapeHTML(d.modelLabel||d.model||'PB2180LK')+' · Beta</small><span class="pmWifiState">'+'Wi-Fi not connected'+'</span></div><div class="pmWifiGrillActions"><button type="button" data-connections="'+key+'" aria-label="Connections for '+escapeHTML(d.nickname)+'">Connections</button></div></div>';
+ }).join('')||'<p class="muted">Your saved grills will appear here.</p>';
+ document.querySelectorAll('[data-grill]').forEach(row=>{
+  const select=()=>{const d=savedPits.find(g=>pitIdentity(g)===row.dataset.grill);if(d)chooseSavedGrill(d);};
+  row.onclick=e=>{if(!e.target.closest('button'))select();};
+  row.onkeydown=e=>{if(e.target===row&&(e.key==='Enter'||e.key===' ')){e.preventDefault();select();}};
+ });
+ document.querySelectorAll('[data-connections]').forEach(button=>button.onclick=e=>{e.stopPropagation();const d=savedPits.find(g=>pitIdentity(g)===button.dataset.connections);if(d)openGrillConnections(d);});
+ updateGrillHeading();renderPitDetails();refreshConnectionStatus();
+}
+for(const id of ['pmGrillModel','pmConnectionModel']){
+ const select=$(id);select.add(new Option('Other / Unknown','__other__'));
+ Object.keys(grillCatalog.models).sort().forEach(name=>select.add(new Option(name,name)));
+}
+$('pmGrillModel').onchange=()=>{$('pmOtherModelLabel').hidden=$('pmGrillModel').value!=='__other__';};
+$('pmConnectionModel').onchange=()=>{
+ const d=savedPits.find(g=>pitIdentity(g)===selectedPit);if(!d)return;
+ if(primeActive||controlPending||$('pmWifiProvisionButton').disabled){$('pmConnectionModel').value=d.model||'PB2180LK';toast('Wait for the current request to finish before changing models.',true);return;}
+ d.model=$('pmConnectionModel').value;if(d.model!=='__other__')d.modelLabel='';put('savedPits',savedPits);clearGrillConnection();syncGrillProfile();updateModelUI();renderSavedPits();if(ip)rpc();
+};
+$('pmBetaReport').onclick=()=>{
+ const d=savedPits.find(g=>pitIdentity(g)===selectedPit),p=selectedGrillProfile();
+ const report=['Pit Master Controller 0.3.0-beta2 test report','Model: '+(d?.modelLabel||p.model),'Board: '+(p.board||'Unknown'),'Bluetooth: '+$('pmBleLinkStatus').textContent,'Wi-Fi: '+$('pmWifiLinkStatus').textContent,'Observed issue / steps: [add here]','Firmware version from grill/app: [add if known]','Latest readings: '+JSON.stringify(Object.fromEntries(['moduleIsOn','isFahrenheit','grillTemp','grillSetTemp','smokerActTemp','p_1_Temp','p_2_Temp','p_3_Temp','p_4_Temp'].filter(k=>last&&k in last).map(k=>[k,last[k]]))),'Temperature change: '+$('pmTemperatureStatus').textContent,'--- Recent actions ---',events.join('\n'),'--- Diagnostics ---',pmBleLogText()].join('\n');
+ if(window.LockhartNative?.exportBleLog)window.LockhartNative.exportBleLog(redactDiagnostic(report));else toast('Report sharing is available in the Android app.',true);
+};
+$('pmGrillModel').value=savedPits.find(g=>pitIdentity(g)===selectedPit)?.model||(savedPits.length?'PB2180LK':'__other__');
+syncGrillProfile();updateModelUI();
+function requestWifiNetworks(){
+ $('pmWifiScanStatus').textContent='Looking for nearby networks…';
+ if(window.LockhartNative?.scanWifiNetworks)window.LockhartNative.scanWifiNetworks();
+ else $('pmWifiScanStatus').textContent='You can enter your network name below.';
+}
+let nearbyWifiNetworks=[];
+function closeWifiChoices(){ $('pmWifiChoices').hidden=true;$('pmWifiNetworks').setAttribute('aria-expanded','false'); }
+function renderWifiChoices(){
+ const list=$('pmWifiChoices'),current=$('pmWifiSsid').value;list.replaceChildren();
+ const hint=document.createElement('p');hint.id='pmWifiPullHint';hint.textContent='Pull down to refresh';hint.setAttribute('role','status');list.append(hint);
+ nearbyWifiNetworks.forEach(network=>{
+  const button=document.createElement('button');button.type='button';
+  button.setAttribute('aria-pressed',String(network.ssid===current));
+  const name=document.createElement('span');name.textContent=network.ssid;
+  const band=document.createElement('small');band.textContent=network.band+(network.ssid===current?' ✓':'');
+  button.append(name,band);button.onclick=()=>{
+   $('pmWifiSsid').value=network.ssid;$('pmWifiNetworkName').textContent=network.ssid;
+   $('pmWifiSsid').hidden=true;$('pmWifiManualLabel').hidden=true;
+   closeWifiChoices();renderWifiChoices();$('pmWifiNetworks').focus();
+  };list.append(button);
+ });
+ const manual=document.createElement('button');manual.type='button';manual.className='pmManualNetwork';manual.textContent='Enter network name…';
+ manual.onclick=()=>{closeWifiChoices();$('pmWifiNetworkName').textContent='Enter network name…';$('pmWifiSsid').hidden=false;$('pmWifiManualLabel').hidden=false;$('pmWifiSsid').value='';$('pmWifiSsid').focus();};list.append(manual);
+}
+window.receiveWifiNetworks=function(raw,message){
+ try{const parsed=JSON.parse(raw);nearbyWifiNetworks=Array.isArray(parsed)?parsed.filter(n=>typeof n.ssid==='string'&&n.ssid):[];}catch(_){nearbyWifiNetworks=[];}
+ const current=$('pmWifiSsid').value,known=nearbyWifiNetworks.some(n=>n.ssid===current);
+ $('pmWifiNetworkName').textContent=current||'Choose a network';
+ $('pmWifiSsid').hidden=known;$('pmWifiManualLabel').hidden=known;
+ renderWifiChoices();$('pmWifiScanStatus').textContent=message;
+};
+$('pmWifiNetworks').onclick=()=>{
+ const open=$('pmWifiChoices').hidden;
+ renderWifiChoices();$('pmWifiChoices').hidden=!open;$('pmWifiNetworks').setAttribute('aria-expanded',String(open));if(open)requestWifiNetworks();
+};
+$('pmWifiPicker').addEventListener('keydown',e=>{
+ if(e.key==='Escape'&&!$('pmWifiChoices').hidden){e.preventDefault();e.stopPropagation();closeWifiChoices();$('pmWifiNetworks').focus();}
+ if(e.key==='ArrowDown'||e.key==='ArrowUp'){
+  e.preventDefault();renderWifiChoicesIfClosed();
+  const choices=[...$('pmWifiChoices').querySelectorAll('button')],index=choices.indexOf(document.activeElement);
+  choices[(index+(e.key==='ArrowDown'?1:-1)+choices.length)%choices.length]?.focus();
+ }
+});
+function renderWifiChoicesIfClosed(){if($('pmWifiChoices').hidden){renderWifiChoices();$('pmWifiChoices').hidden=false;$('pmWifiNetworks').setAttribute('aria-expanded','true');requestWifiNetworks();}}
+$('pmConnectionsDialog').addEventListener('close',closeWifiChoices);
+renderWifiChoices();
+let wifiPullStart=null,wifiPullDistance=0;
+const wifiChoices=$('pmWifiChoices');
+function beginWifiPull(y){wifiPullStart=wifiChoices.scrollTop<=0?y:null;wifiPullDistance=0;}
+function moveWifiPull(y,event){
+ if(wifiPullStart===null)return;
+ wifiPullDistance=Math.max(0,y-wifiPullStart);
+ if(wifiPullDistance>8&&event.cancelable)event.preventDefault();
+ const hint=$('pmWifiPullHint');if(hint)hint.textContent=wifiPullDistance>=64?'Release to refresh':'Pull down to refresh';
+}
+function endWifiPull(){
+ const refresh=wifiPullStart!==null&&wifiPullDistance>=64;
+ wifiPullStart=null;wifiPullDistance=0;
+ const hint=$('pmWifiPullHint');if(hint)hint.textContent=refresh?'Refreshing networks…':'Pull down to refresh';
+ if(refresh)requestWifiNetworks();
+}
+wifiChoices.addEventListener('touchstart',e=>{if(e.touches.length===1)beginWifiPull(e.touches[0].clientY);},{passive:true});
+wifiChoices.addEventListener('touchmove',e=>{if(e.touches.length===1)moveWifiPull(e.touches[0].clientY,e);},{passive:false});
+wifiChoices.addEventListener('touchend',endWifiPull);
+wifiChoices.addEventListener('touchcancel',()=>{wifiPullStart=null;wifiPullDistance=0;});
+wifiChoices.addEventListener('pointerdown',e=>{if(e.pointerType==='mouse')beginWifiPull(e.clientY);});
+wifiChoices.addEventListener('pointermove',e=>{if(e.pointerType==='mouse'&&e.buttons===1)moveWifiPull(e.clientY,e);});
+wifiChoices.addEventListener('pointerup',e=>{if(e.pointerType==='mouse')endWifiPull();});
+wifiChoices.addEventListener('keydown',e=>{if(e.key==='r'&&e.altKey){e.preventDefault();requestWifiNetworks();}});
+function fitVisibleScreen(){document.documentElement.style.setProperty('--usable-height',(window.visualViewport?.height||innerHeight)+'px');}
+window.visualViewport?.addEventListener('resize',fitVisibleScreen);window.addEventListener('resize',fitVisibleScreen);fitVisibleScreen();
+$('pmCloseConnections').onclick=()=>{$('pmWifiPassword').value='';$('pmConnectionsDialog').close();};
+$('pmConnectionsDialog').addEventListener('close',()=>{$('pmWifiPassword').value='';});
+
 window.pitBleScanning=false;
 let pitBleInterval=null;
 let pitBleSeconds=0;
@@ -603,7 +927,7 @@ window.receiveBle=function(kind,payload){
       if(i<0)foundPits.push(d);else foundPits[i]=d;
       foundPits.sort((a,b)=>b.rssi-a.rssi);
       renderPitList();renderPitDetails();
-      if(window.pitBleScanning)$('scanStatus').textContent='Scanning… '+pitBleSeconds+'s remaining · '+foundPits.filter(isPitBossBle).length+' Pit Boss · '+foundPits.length+' total BLE';
+      if(window.pitBleScanning)$('scanStatus').textContent='Scanning… '+pitBleSeconds+'s remaining · '+foundPits.filter(isPitBossBle).length+' Pit Boss · '+foundPits.length+' nearby devices';
     }catch(e){log('BLE data error: '+e.message)}
     return;
   }
@@ -615,7 +939,7 @@ window.receiveBle=function(kind,payload){
     renderPitList();
     pitBleInterval=setInterval(()=>{
       pitBleSeconds=Math.max(0,pitBleSeconds-1);
-      if(window.pitBleScanning)$('scanStatus').textContent='Scanning… '+pitBleSeconds+'s remaining · '+foundPits.filter(isPitBossBle).length+' Pit Boss · '+foundPits.length+' total BLE';
+      if(window.pitBleScanning)$('scanStatus').textContent='Scanning… '+pitBleSeconds+'s remaining · '+foundPits.filter(isPitBossBle).length+' Pit Boss · '+foundPits.length+' nearby devices';
     },1000);
     return;
   }
@@ -626,8 +950,8 @@ window.receiveBle=function(kind,payload){
       $('bleDiagnostics').textContent='Native callbacks: '+report.callbacks+' · Unique devices: '+report.devices+' · Parse errors: '+report.parseErrors;
     } catch(e){$('bleDiagnostics').textContent='Native scan finished: '+payload;}
     $('scanStatus').textContent=foundPits.length
-      ?'Scan complete · '+foundPits.filter(isPitBossBle).length+' Pit Boss · '+foundPits.length+' total BLE'
-      :'Scan complete · No BLE advertisements received';
+      ?'Scan complete · '+foundPits.filter(isPitBossBle).length+' Pit Boss · '+foundPits.length+' nearby devices'
+      :'Scan complete · No grills found. Move closer and try again.';
     return;
   }
   if(kind==='error'){
@@ -642,6 +966,9 @@ window.receiveBle=function(kind,payload){
 // PBG FE0B/FE0C offsets from pytboss/grills.json control_boards.PBG.
 // Read-only decoding: NEVER sends grill commands. Strict frame lengths avoid fabricated zero readings.
 function pmDecodePbgFrame(raw){
+ const board=selectedGrillProfile().board;
+ if(board&&grillCatalog.boards[board])return modelFrame(raw,raw.startsWith('FE0C')?'temperatures':'status');
+ if(selectedGrillProfile().model!=='PB2180LK')return null;
  const payload=String(raw||'').trim().split(/\s+\[/)[0];
  if(!/^FE0[BC][0-9a-fA-F]*$/.test(payload)||payload.length%2!==0)return null;
  const bytes=Array.from({length:payload.length/2},(_,i)=>parseInt(payload.slice(i*2,i*2+2),16));
@@ -665,7 +992,7 @@ function pmHandlePbgFrame(payload){
  if(window.pmTransportMode==='bluetooth'){
   // Do not present a temperature until FE0C actually supplies one.
   last={...pmBleState,p_1_Temp:pmBleState.p1Temp,p_2_Temp:pmBleState.p2Temp,p_3_Temp:pmBleState.p3Temp,p_4_Temp:pmBleState.p4Temp};
-  $('connectionText').textContent='BLE TELEMETRY';$('status').className='pvDigitalStatus ok';
+  $('connectionText').textContent='CONNECTED';$('status').className='pvDigitalStatus ok';
   drawUnit();drawSetpoint();drawLight();renderPitDetails();drawTemps();drawFlags();
  }
  log('BLE PBG '+payload.slice(0,4)+' decoded via Bluetooth');return true;
@@ -750,7 +1077,8 @@ function handleSetupEvent(kind, message){
 }
 const previousReceiveBle=window.receiveBle;
 // Persistent bounded diagnostic log; stored across screen changes and app restarts.
-const PM_BLE_LOG_KEY='pm_ble_diagnostic_log_v2';
+const PM_BLE_LOG_KEY='pm_ble_diagnostic_log_v3';
+localStorage.removeItem('pm_ble_diagnostic_log_v2');
 let pmBleLog=[];
 try { pmBleLog=JSON.parse(localStorage.getItem(PM_BLE_LOG_KEY)||'[]'); if(!Array.isArray(pmBleLog))pmBleLog=[]; } catch(e) {pmBleLog=[];}
 function pmBleLogAdd(kind, payload){
@@ -760,15 +1088,15 @@ function pmBleLogAdd(kind, payload){
  try{localStorage.setItem(PM_BLE_LOG_KEY,JSON.stringify(pmBleLog));}catch(e){pmBleLog=pmBleLog.slice(-400);try{localStorage.setItem(PM_BLE_LOG_KEY,JSON.stringify(pmBleLog));}catch(_){}}
  const count=$('pmBleLogCount');if(count)count.textContent=pmBleLog.length+' log entries saved';
 }
-function pmBleLogText(){return 'Pit Master Controller BLE log\n'+pmBleLog.join('\n');}
+function pmBleLogText(){const p=selectedGrillProfile();return 'Pit Master Controller beta · model='+p.model+' board='+(p.board||'unknown')+'\n'+pmBleLog.join('\n');}
 $('pmExportBleLog').onclick=function(){
  const txt=pmBleLogText();
- if(window.LockhartNative&&window.LockhartNative.exportBleLog){window.LockhartNative.exportBleLog(txt);return;}
+ if(window.LockhartNative&&window.LockhartNative.exportBleLog){window.LockhartNative.exportBleLog(redactDiagnostic(txt));return;}
  const area=document.createElement('textarea');area.value=txt;document.body.appendChild(area);area.select();
  try{document.execCommand('copy');alert('BLE log copied');}catch(e){alert('Unable to export log');}
  area.remove();
 };
-$('pmCopyBleLog').onclick=function(){const txt=pmBleLogText();if(window.LockhartNative&&window.LockhartNative.copyBleLog){window.LockhartNative.copyBleLog(txt);return;}navigator.clipboard.writeText(txt).then(()=>alert('BLE log copied')).catch(()=>alert('Copy unavailable; use Share BLE Log'));};
+$('pmCopyBleLog').onclick=function(){const txt=pmBleLogText();if(window.LockhartNative&&window.LockhartNative.copyBleLog){window.LockhartNative.copyBleLog(redactDiagnostic(txt));return;}navigator.clipboard.writeText(txt).then(()=>alert('BLE log copied')).catch(()=>alert('Copy unavailable; use Share BLE Log'));};
 $('pmClearBleLog').onclick=function(){pmBleLog=[];localStorage.removeItem(PM_BLE_LOG_KEY);$('bleDiagnostics').textContent='BLE log cleared. Select your grill to collect transport events.';$('pmBleLogCount').textContent='0 log entries saved';};
 $('pmBleLogCount').textContent=pmBleLog.length+' log entries saved';
 window.receiveBle=function(kind,payload){
@@ -800,26 +1128,180 @@ $('scanPits').onclick=()=>{
   $('bleDiagnostics').textContent='Waiting for Android scanner…';
   window.pitBleScanning=true;
   renderPitList();
-  $('scanStatus').textContent='Starting BLE scan…';
+  $('scanStatus').textContent='Looking for nearby grills…';
   if(window.LockhartNative&&window.LockhartNative.scanBle)window.LockhartNative.scanBle();
-  else {stopPitBleClock();renderPitList();$('scanStatus').textContent='Android Bluetooth bridge not installed';}
+  else {stopPitBleClock();renderPitList();$('scanStatus').textContent='Please update the app to connect your grill.';}
 };
 $('ip').addEventListener('input',()=>{$('pitIP').value=$('ip').value});
 $('pitIP').addEventListener('input',()=>{$('ip').value=$('pitIP').value});
-$('savePit').onclick=()=>{const address=selectedPit.startsWith('ip:')?'':selectedPit;const pitIP=$('pitIP').value.trim();if(pitIP&&!validIP(pitIP))return toast('Enter a valid IPv4 address');if(!address&&!pitIP)return toast('Select a Bluetooth device or enter a grill IP');const nickname=$('pitNickname').value.trim()||'My Pit Boss';const key=address||'ip:'+pitIP;const found=foundPits.find(x=>x.address===address);const previous=savedPits.find(x=>pitIdentity(x)===key);const d={address,nickname,ip:pitIP,bleName:found?.name||previous?.bleName||'',wifiConfigured:previous?.wifiConfigured===true};savedPits=savedPits.filter(x=>(x.address||'ip:'+x.ip)!==key);savedPits.push(d);put('savedPits',savedPits);selectedPit=key;put('selectedPit',key);if(pitIP){ip=pitIP;put('ip',ip);$('ip').value=ip;rpc()}renderSavedPits();$('scanStatus').textContent='Saved '+nickname};
-$('removePit').onclick=()=>{if(!selectedPit)return;const before=savedPits.length;savedPits=savedPits.filter(x=>(x.address||'ip:'+x.ip)!==selectedPit);if(savedPits.length===before)return;put('savedPits',savedPits);selectedPit='';put('selectedPit','');$('pitNickname').value='';$('pitIP').value='';renderSavedPits()};
+$('savePit').onclick=()=>{const address=selectedPit.startsWith('ip:')?'':selectedPit;const pitIP=$('pitIP').value.trim();if(pitIP&&!validIP(pitIP))return toast('Enter a valid network address');if(!address&&!pitIP)return toast('Find your grill and choose it first.');const nickname=$('pitNickname').value.trim()||'My Pit Boss';const key=address||'ip:'+pitIP;const found=foundPits.find(x=>x.address===address);const previous=savedPits.find(x=>pitIdentity(x)===key);const d={address,nickname,ip:pitIP,model:$('pmGrillModel').value||'__other__',modelLabel:$('pmOtherModel').value.trim(),bleName:found?.name||previous?.bleName||'',wifiSetupVerified:previous?.wifiSetupVerified===true};savedPits=savedPits.filter(x=>(x.address||'ip:'+x.ip)!==key && !(pitIP&&x.ip===pitIP));savedPits.push(d);put('savedPits',savedPits);selectedPit=key;put('selectedPit',key);loadGrillRules();syncGrillProfile();updateModelUI();if(pitIP){ip=pitIP;put('ip',ip);$('ip').value=ip;rpc()}renderSavedPits();$('scanStatus').textContent='Saved '+nickname};
+$('removePit').onclick=()=>{
+ if(!selectedPit)return;
+ if($('pmWifiProvisionButton').disabled){toast('Wait for Wi-Fi setup to finish before removing this grill.',true);return;}
+ savedPits=savedPits.filter(g=>pitIdentity(g)!==selectedPit);put('savedPits',savedPits);
+ clearGrillConnection();selectedPit='';ip='';put('selectedPit','');put('ip','');
+ $('pitNickname').value='';$('pitIP').value='';$('ip').value='';
+ if(window.LockhartNative?.disconnectSelectedGrill)window.LockhartNative.disconnectSelectedGrill();
+ renderSavedPits();syncMonitoring();
+};
 renderPitList();renderSavedPits();
 // Give all buttons tactile feedback, including the control buttons.
 document.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;b.classList.remove('pvFlash');void b.offsetWidth;b.classList.add('pvFlash');setTimeout(()=>b.classList.remove('pvFlash'),560)});
 
+$('pmAppVersion').textContent='Version '+(runtimeInfo.version||releaseConfig.version||'beta');
+$('pmSupportContact').textContent=releaseConfig.supportEmail?'Support: '+releaseConfig.supportEmail:'Support contact will be provided before public release.';
+document.getElementById('pmOpenPublishedPolicy').onclick=()=>{
+ if(window.LockhartNative?.openPolicy)window.LockhartNative.openPolicy(activeLegalKind);
+ else window.open(activeLegalKind==='privacy'?releaseConfig.privacyPolicyUrl:activeLegalKind==='terms'?releaseConfig.termsUrl:releaseConfig.thirdPartyNoticesUrl,'_blank','noopener,noreferrer');
+};
+document.querySelectorAll('[data-legal]').forEach(button=>button.onclick=()=>showLegal(button.dataset.legal));
+$('pmCloseLegal').onclick=()=>$('pmLegalDialog').close();
+$('pmReadSafety').onclick=()=>showLegal('terms');
+$('pmAcceptSafety').onclick=()=>{put('safetyAcknowledged_v1',true);window.LockhartNative?.acknowledgeSafety?.();$('pmSafetyDialog').close();};
+const backupKeys=['savedPits','selectedPit','ip','history','cookHistory','cooks','timers','rules','rulesByGrill','selected','displayUnit'];
+$('pmExportBackup').onclick=()=>{
+ const data=Object.fromEntries(backupKeys.map(k=>[k,get(k,null)]));
+ const backup=JSON.stringify({format:'pitmaster-backup',version:1,createdAt:new Date().toISOString(),data});
+ if(window.LockhartNative?.exportLocalBackup)window.LockhartNative.exportLocalBackup(backup);
+ else toast('Backup export is available in the Android app.',true);
+};
+$('pmImportBackup').onclick=()=>{
+ if(primeActive||controlPending||$('pmWifiProvisionButton').disabled){toast('Finish the current operation before restoring a backup.',true);return;}
+ if(window.LockhartNative?.chooseLocalBackup)window.LockhartNative.chooseLocalBackup();
+ else toast('Backup restore is available in the Android app.',true);
+};
+window.restoreAppBackup=async function(raw){
+ try{
+  const backup=JSON.parse(raw),d=backup.data;
+  const record=x=>x&&typeof x==='object'&&!Array.isArray(x);
+  const sample=x=>record(x)&&Number.isFinite(x.t);
+  const samples=x=>Array.isArray(x)&&x.length<=18000&&x.every(sample);
+  if(backup.format!=='pitmaster-backup'||backup.version!==1||!record(d)||!Array.isArray(d.savedPits)||d.savedPits.length>100)throw Error('format');
+  if(!d.savedPits.every(g=>record(g)&&typeof g.nickname==='string'&&g.nickname.length<=100&&(!g.address||/^(?:[0-9a-f]{2}:){5}[0-9a-f]{2}$/i.test(g.address))&&(!g.ip||validIP(g.ip))&&(!g.model||typeof g.model==='string')))throw Error('grills');
+  if(d.history!=null&&!samples(d.history))throw Error('history');
+  if(d.cookHistory!=null&&(!record(d.cookHistory)||!Object.values(d.cookHistory).every(samples)))throw Error('cook history');
+  if(d.cooks!=null&&(!Array.isArray(d.cooks)||d.cooks.length>1000||!d.cooks.every(c=>record(c)&&typeof c.name==='string'&&Number.isFinite(c.start))))throw Error('cooks');
+  if(d.timers!=null&&(!Array.isArray(d.timers)||d.timers.length>1000||!d.timers.every(t=>record(t)&&typeof t.name==='string'&&Number.isFinite(t.end))))throw Error('timers');
+  if(d.rules!=null&&!record(d.rules))throw Error('alerts');
+  if(d.rulesByGrill!=null&&!record(d.rulesByGrill))throw Error('grill alerts');
+  if(d.selected!=null&&(!Array.isArray(d.selected)||d.selected.length!==6||!d.selected.every(x=>typeof x==='boolean')))throw Error('display');
+  if(d.displayUnit!=null&&!['F','C'].includes(d.displayUnit))throw Error('units');
+  if(!await askConfirm('Restore '+d.savedPits.length+' saved grills and the backup’s cook data? This replaces the matching data currently on this phone.'))return;
+  for(const key of backupKeys)if(d[key]!=null)put(key,d[key]);
+  const chosen=d.savedPits.find(g=>pitIdentity(g)===d.selectedPit)||d.savedPits[0];put('selectedPit',chosen?pitIdentity(chosen):'');put('ip',chosen?.ip||'');
+  put('backgroundAlerts',false);window.LockhartNative?.configureMonitoring?.(false,'','{}','[]');location.reload();
+ }catch(_){toast('This backup could not be restored. Use an original Pit Master Controller backup file.',true);}
+};
+$('pmDeleteLocalData').onclick=async()=>{
+ if(primeActive||controlPending||$('pmWifiProvisionButton').disabled){toast('Wait for the current operation to finish before deleting app data.',true);return;}
+ if(!await askConfirm('Delete saved grills, cook history, timers, settings and logs from this phone? This cannot be undone.'))return;
+ if(window.LockhartNative?.clearLocalData){window.LockhartNative.clearLocalData();}
+ else{localStorage.clear();location.reload();}
+};
+if(runtimeInfo.experimentalPriming===false){$('pvPrime').disabled=true;$('pvStopPrime').disabled=true;$('pvPrime').title='Use the grill panel to prime';}
+setTimeout(()=>{if(!get('safetyAcknowledged_v1',false)&&!document.querySelector('dialog[open]'))$('pmSafetyDialog').showModal();},250);
 const pvNav=$('pvNav'),pvMenuButton=$('pvMenuButton');
-function pvOpen(view){document.querySelectorAll('.pvView').forEach(v=>v.classList.toggle('active',v.id==='view-'+view));pvNav.querySelectorAll('button').forEach(b=>b.classList.toggle('active',b.dataset.view===view));pvNav.classList.remove('open');$('pvScrim').classList.remove('open');pvMenuButton.setAttribute('aria-expanded','false');window.scrollTo(0,0);if(view==='history')setTimeout(refreshCookHistory,0)}
+let previousViews=[];
+function pvOpen(view,remember=true){const current=document.querySelector('.pvView.active')?.id.slice(5)||'dashboard';if(remember&&current!==view){if(view==='dashboard')previousViews=[];else previousViews.push(current);}if(window.LockhartNative?.resetExitGuard)window.LockhartNative.resetExitGuard();document.querySelectorAll('.pvView').forEach(v=>v.classList.toggle('active',v.id==='view-'+view));pvNav.querySelectorAll('button').forEach(b=>b.classList.toggle('active',b.dataset.view===view));pvNav.classList.remove('open');$('pvScrim').classList.remove('open');pvMenuButton.setAttribute('aria-expanded','false');window.scrollTo(0,0);if(view==='history')setTimeout(refreshCookHistory,0)}
+window.pmHandleBack=function(){
+ if(!$('pmWifiChoices').hidden){closeWifiChoices();return true;}
+ const dialog=[...document.querySelectorAll('dialog[open]')].at(-1);
+ if(dialog){
+  // Let confirmation owners resolve pending decisions through their Cancel button.
+  if(dialog.id==='pvConfirmDialog')$('pvConfirmCancel').click();
+  else dialog.close();
+  return true;
+ }
+ if(pvNav.classList.contains('open')){pvNav.classList.remove('open');$('pvScrim').classList.remove('open');pvMenuButton.setAttribute('aria-expanded','false');return true;}
+ const current=document.querySelector('.pvView.active')?.id||'view-dashboard';
+ if(current!=='view-dashboard'){pvOpen(previousViews.pop()||'dashboard',false);return true;}
+ return false;
+};
 pvMenuButton.onclick=()=>{const open=pvNav.classList.toggle('open');$('pvScrim').classList.toggle('open',open);pvMenuButton.setAttribute('aria-expanded',String(open))};
 $('pvScrim').onclick=()=>{pvNav.classList.remove('open');$('pvScrim').classList.remove('open');pvMenuButton.setAttribute('aria-expanded','false')};
 $('pvPrimeDialog').addEventListener('click',e=>{if(e.target===$('pvPrimeDialog'))$('pvPrimeDialog').close()});
 pvNav.querySelectorAll('button[data-view]').forEach(b=>b.onclick=()=>pvOpen(b.dataset.view));
 
-setDisplayUnit(displayUnit,false);drawLight();drawTemps();
+setDisplayUnit(displayUnit,displayUnit==='C');drawLight();drawTemps();
 document.addEventListener('contextmenu',e=>{if(!e.target.closest('input,textarea,[contenteditable="true"]'))e.preventDefault()});
 document.addEventListener('selectstart',e=>{if(!e.target.closest('input,textarea,[contenteditable="true"]'))e.preventDefault()});
-</script></body></html>
+</script>
+<script>
+(function(){
+ const button=document.getElementById('pmWifiProvisionButton');
+ const status=document.getElementById('pmWifiProvisionStatus');
+ const password=document.getElementById('pmWifiPassword');
+ let timer=null,watchdog=null,attempts=0,provisioned=false,verificationId=null,targetPit=null;
+ console.info('Wi-Fi provisioning handlers ready');
+ function friendlySetupMessage(text){
+ const value=String(text);
+ if(/already running|busy/i.test(value))return 'Your grill is busy connecting. Please wait a moment.';
+ if(/permission/i.test(value))return 'Allow Nearby devices in your phone settings, then try again.';
+ if(/save outcome unknown|outcome unknown/i.test(value))return 'Your grill may be restarting. Wait a moment, then check its connection before trying again.';
+ if(/timed out|could not establish|not connected|connection closed/i.test(value))return 'We couldn’t reach your grill. Check that it’s powered on and keep your phone nearby, then try again.';
+ if(/rejected|did not acknowledge|invalid.*response|unexpected.*response/i.test(value))return 'Your grill couldn’t finish Wi-Fi setup. Please try again.';
+ if(/connecting to saved|Bluetooth before/i.test(value))return 'Connecting to your grill… Keep your phone nearby.';
+ if(/accepted|saving configuration/i.test(value))return 'Saving your Wi-Fi connection. Your grill may restart…';
+ if(/configuration saved/i.test(value))return 'Wi-Fi details saved. Waiting for your grill to connect…';
+ if(/RPC|GATT|Config\.|controller|native|BLE/i.test(value))return 'Connecting to your grill…';
+ return value;
+ }
+ function message(s){status.textContent=friendlySetupMessage(s);const other=document.getElementById('pmWifiCheckStatus');if(other)other.textContent=s;}
+ function stop(){if(timer)clearTimeout(timer);if(watchdog)clearTimeout(watchdog);timer=null;watchdog=null;button.disabled=false;}
+ function verify(){
+  if(!provisioned)return;
+  if(attempts++>=8){provisioned=false;stop();message('We couldn’t reach your grill. Make sure your phone and grill are on the same Wi-Fi, then try again.');return;}
+  message('Looking for grill on Wi-Fi… attempt '+attempts+'/8');
+  if(window.LockhartNative?.discoverWifiGrill)window.LockhartNative.discoverWifiGrill();
+  timer=setTimeout(verify,6500);
+ }
+ button.addEventListener('click',function(){
+  console.info('Wi-Fi setup button clicked');
+  const ssid=document.getElementById('pmWifiSsid').value,pass=password.value;
+  if(!ssid||!pass){message('Enter a Wi-Fi name and password.');return;}
+  if(!window.LockhartNative?.provisionWifiForGrill){message('Please update the app to connect your grill.');return;}
+  const grill=savedPits.find(g=>pitIdentity(g)===selectedPit);
+  if(!grill?.address){message('Tap Find Grills and choose your grill before setting up Wi-Fi.');return;}
+  stop();provisioned=false;attempts=0;verificationId=null;targetPit=selectedPit;button.disabled=true;
+  watchdog=setTimeout(()=>{provisioned=false;stop();message('Setup timed out. Outcome unknown; reconnect Bluetooth and check the grill before retrying.');},90000);
+  message('Connecting your pit to Wi-Fi…');
+  try{window.LockhartNative.provisionWifiForGrill(grill.address,ssid,pass)}catch(e){stop();message('Couldn’t connect. Keep your phone near the grill and try again.')}finally{password.value='';}
+ });
+ const bleLabel=document.getElementById('pmBleLinkStatus');
+ const wifiLabel=document.getElementById('pmWifiLinkStatus');
+ const activeLabel=document.getElementById('pmActiveLinkStatus');
+ const addressLabel=document.getElementById('pmVerifiedAddress');
+ const setBle=(value)=>{bleLabel.textContent=value; if(value==='Connected'&&activeLabel.textContent==='Not connected')activeLabel.textContent='Bluetooth'; if(value==='Disconnected'&&activeLabel.textContent.startsWith('Bluetooth'))activeLabel.textContent='Not connected';};
+ const priorBle=window.receiveBle;
+ window.receiveBle=function(kind,payload){
+  if(kind==='setup_ble_link'){setBle(payload==='connected'?'Connected':payload==='connecting'?'Connecting…':'Disconnected');refreshConnectionStatus();}
+  if(kind==='setup_wifi_saved'){wifiLabel.textContent='Verifying…';activeLabel.textContent='Not connected';}
+  if(kind==='setup_wifi_error')wifiLabel.textContent='Not connected';
+  if(kind==='setup_wifi_status'){message(payload)}
+  if(kind==='setup_wifi_saved'){if(watchdog)clearTimeout(watchdog);watchdog=null;provisioned=true;message(payload);timer=setTimeout(verify,12000)}
+  if(kind==='setup_wifi_error'){provisioned=false;stop();message('Wi-Fi setup failed: '+payload)}
+  if(kind==='setup_ip'&&provisioned){message('Found your grill. Checking the connection…');verificationId=null;}
+  if(typeof priorBle==='function')priorBle(kind,payload);
+  if(kind==='setup_ip'&&provisioned)verificationId=window.pitSetupVerification;
+ };
+ const priorRpc=window.receiveRpc;
+ window.receiveRpc=function(id,body,error){
+  const request=wifiRequests.get(id);
+  const current=id===pending&&request&&request.pit===selectedPit&&request.address===ip;
+  const matches=current&&provisioned&&verificationId!=null&&id===verificationId;
+  if(typeof priorRpc==='function')priorRpc(id,body,error);
+  if(current){
+   liveWifi=!error&&last&&document.getElementById('connectionText').textContent==='CONNECTED'?{pit:selectedPit,address:ip,at:Date.now()}:null;
+   wifiRequests.delete(id);refreshConnectionStatus();
+  }
+  if(!matches||error||document.getElementById('connectionText').textContent!=='CONNECTED')return;
+  provisioned=false;stop();
+  const d=savedPits.find(g=>pitIdentity(g)===targetPit);
+  if(d){d.ip=ip;d.wifiSetupVerified=true;put('savedPits',savedPits);renderSavedPits();}
+  refreshConnectionStatus();
+  message('Your pit is connected to Wi-Fi. You’re ready to cook.');
+ };
+setInterval(refreshConnectionStatus,1000);
+})();
+</script>
+</body></html>

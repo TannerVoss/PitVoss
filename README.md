@@ -1,14 +1,37 @@
-# Lockhart Local — Android Wi-Fi monitor (first test build)
+# Pit Master Controller
 
-Connects directly to the Pit Boss Lockhart HTTP RPC interface on the same Wi-Fi network. No Mac or Bluetooth needed after installation.
+Independent Android companion for compatible grills, including the Pit Boss Lockhart PB2180LK. Uses local Wi-Fi RPC and Bluetooth discovery/provisioning. Model listings indicate available profiles, not verified hardware compatibility.
 
-## Build on Mac using Android Studio
-1. Unzip this folder.
-2. Open Android Studio > Open > select the **LockhartAndroid** folder (not the `app` folder).
-3. Let Android Studio download/sync Gradle. Use JDK 17 (Android Studio bundled JDK works).
-4. Connect Galaxy S25 Ultra with USB debugging, select it and Run. Or Build > Build APK(s) and install the resulting APK.
-5. On the phone, connect to your home Wi-Fi. Open Lockhart Local and confirm grill IP (currently 192.168.1.153). Verify live temperatures.
+## Build and checks
 
-This is intentionally READ ONLY. The HTTP GetState endpoint was verified, but Wi-Fi control RPCs have not been physically verified. Power, prime, setpoint and light commands are not sent by this app. No cloud access, no external libraries, no Wi-Fi passwords stored. The app uses HTTP on the trusted LAN; do not expose the grill to the internet. Its local RPC response may include the grill's device password; this build parses it in memory but does not display, log or store that field. Temperature history, timers and alert settings use WebView local storage. Monitoring and alarms only work while the app is open; not safety-grade.
+Open this folder in Android Studio. The project uses Android Gradle Plugin 9.4.0, Gradle 9.6.0 and Android SDK 36 (minimum Android API 26). Use Android Studio's bundled JDK and an installed SDK 36.
 
-Note: Android Studio may prompt to install Android SDK 35 and Gradle plugins. This ZIP contains source code, not a compiled APK; Android SDK is not installed in this execution environment.
+```sh
+./gradlew testDebugUnitTest lintRelease assembleRelease bundleRelease
+npm ci
+PLAYWRIGHT_CHANNEL=chrome npm run test:ui
+```
+
+The UI checks use Playwright and an installed Chrome. They mock the native bridge and do not exercise smoker hardware. Unit tests cover local IPv4 validation and response-size limits. Release APK/AAB builds are unsigned unless upload-signing configuration is explicitly supplied locally. No keys or credentials are included in this repository.
+
+## Release behavior
+
+Release and internal builds disable remote priming. Debug builds expose experimental candidate commands for attended testing only; do not use them as verified appliance controls. Temperature changes use model setpoints and a fresh power/unit preflight. HTTP destinations are restricted to private or link-local IPv4 addresses, redirects are rejected, and response sizes are bounded. Background monitoring uses Android's connected-device foreground service and can still be interrupted.
+
+The existing `com.pitvoss.app` application ID, Kotlin package, preference keys and notification-channel IDs remain stable for saved-data and installation compatibility. Those identifiers do not determine the publisher name. Tanner Voss is the publisher shown in the app and policies.
+
+## Policies and data
+
+Read policies offline from About & Help, or choose “Open published page” to open the fixed public URL in your browser:
+
+- [Privacy Policy](https://tannervoss.github.io/Pit_Master_Controller/privacy-policy.html)
+- [Terms of Service & Safety Notice](https://tannervoss.github.io/Pit_Master_Controller/terms.html)
+- [Third-Party Notices](https://tannervoss.github.io/Pit_Master_Controller/third-party-notices.html)
+
+User-requested JSON backups contain local app data and should be kept private. Reports redact addresses and credential fields; review them before sharing. Delete Local Data clears app-owned data, not settings stored on the grill or previously exported files. Android backup is disabled.
+
+## iPhone development
+
+The separate [iOS pull request](https://github.com/TannerVoss/Pit_Master_Controller/pull/1) contains the Swift/CoreBluetooth/WKWebView port. It builds and launches in an iPhone simulator. Physical iPhone, Bluetooth and smoker functions still require device testing. This Android update does not merge or modify that port.
+
+See [release synchronization notes](docs/android-release-sync.md) and [policy review](docs/policy-audit.md) for validation and remaining Google Play steps. No hardware safety or store-approval claim is made.
