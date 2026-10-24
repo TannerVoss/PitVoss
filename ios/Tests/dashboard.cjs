@@ -1,0 +1,24 @@
+const {chromium}=require('playwright');
+const assert=require('node:assert/strict');
+const path=require('node:path');
+(async()=>{
+ const browser=await chromium.launch({headless:true,channel:'chrome'});
+ const page=await browser.newPage({viewport:{width:390,height:844}});const errors=[];
+ page.on('pageerror',e=>errors.push(e.message));
+ await page.addInitScript(()=>{window.nativeMessages=[];window.webkit={messageHandlers:{pit:{postMessage:m=>window.nativeMessages.push(m)}}}});
+ await page.goto('file://'+path.resolve(__dirname,'../PitMaster/Web/index.html'));
+ await page.waitForTimeout(600);
+ assert.equal(await page.evaluate(()=>typeof LockhartNative.setTemperature),'function');
+ assert.equal(await page.evaluate(()=>JSON.parse(LockhartNative.getRuntimeInfo()).experimentalPriming),false);
+ assert.equal(await page.locator('#backgroundAlerts').isDisabled(),true);
+ await page.locator('#pmAcceptSafety').click();
+ assert(await page.evaluate(()=>nativeMessages.some(x=>x.method==='acknowledgeSafety')));
+ await page.evaluate(()=>{LockhartNative.setTransportMode('bluetooth');if(LockhartNative.getTransportMode()!=='bluetooth')throw Error('mode');LockhartNative.provisionWifiForGrill('test-uuid','example','example-password');});
+ const provisioning=await page.evaluate(()=>nativeMessages.find(x=>x.method==='provisionWifiForGrill'));
+ assert.equal(provisioning.args.length,3);
+ await page.evaluate(()=>receiveWifiNetworks('[]','iPhone apps cannot list nearby Wi-Fi networks. Enter the network name.'));
+ await page.screenshot({path:path.resolve(__dirname,'../dashboard-preview.png'),fullPage:true});
+ assert.deepEqual(errors,[]);
+ console.log('PASS: dashboard loads, bridge contract, safety acknowledgment, priming gate, foreground-only monitoring UI, transport getter, provisioning dispatch; no JS errors.');
+ await browser.close();
+})().catch(e=>{console.error(e);process.exit(1)});

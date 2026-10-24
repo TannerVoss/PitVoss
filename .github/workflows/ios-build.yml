@@ -1,0 +1,18 @@
+name: iOS simulator build
+on:
+  pull_request:
+    paths: ['ios/**', '.github/workflows/ios-build.yml']
+  push:
+    branches: ['ios/native-port']
+    paths: ['ios/**', '.github/workflows/ios-build.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: macos-15
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Compile unsigned iOS simulator app
+        run: xcodebuild -project ios/PitMaster.xcodeproj -scheme PitMaster -sdk iphonesimulator -destination 'generic/platform=iOS Simulator' -derivedDataPath "$RUNNER_TEMP/PitMasterBuild" CODE_SIGNING_ALLOWED=NO build
